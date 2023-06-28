@@ -1,6 +1,7 @@
 using Application.Dtos;
 using Application.Services.Teams;
 using AutoMapper;
+using DotaStatistics.Contracts;
 using DotaStatistics.External;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,4 +31,15 @@ public class TeamController: ControllerBase
 
         await _teamService.SyncTeams(dtos);
     }
+
+    [HttpGet]
+    [ProducesResponseType(typeof(IEnumerable<TeamContract>), StatusCodes.Status200OK)]
+    public async Task<IEnumerable<TeamContract>> GetAll()
+    {
+        var teamDtos = _teamService.GetAll();
+
+        var contracts = _mapper.Map<IEnumerable<TeamContract>>(teamDtos);
+        return contracts;
+    }
+
 }

@@ -4,7 +4,11 @@ namespace Application.Services.Games;
 
 public interface IGameService
 {
-    Task<GameSearchResultDto> GetGamesByCharactersSetup(GameWithCharacterSetupSearchDto searchDto);
+    Task<IEnumerable<GameFullDto>> GetGamesByCharactersSetup(GameWithCharacterSetupSearchDto searchDto);
 
-    Task SetComment(string comment);
+    Task SetComment(SetGameCommentDto commentDto);
+
+    Task<IEnumerable<GameFullDto>> GetAll();
+
+    Task Create(GameCreateDto createDto);
 }

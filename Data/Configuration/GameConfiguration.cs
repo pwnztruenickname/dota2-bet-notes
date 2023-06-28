@@ -11,6 +11,7 @@ public class GameConfiguration : IEntityTypeConfiguration<Game>
         builder.ToTable("games");
         
         builder.Property(h => h.Id).UseIdentityByDefaultColumn().HasComment("Идентификатор записи");
+        builder.HasKey(h => h.Id);
 
         builder.Property(x => x.FirstTeamId).HasComment("Идентификатор пиков первой команды");
         builder.Property(x => x.SecondTeamId).HasComment("Идентификатор пиков первой команды");
@@ -18,13 +19,15 @@ public class GameConfiguration : IEntityTypeConfiguration<Game>
 
         builder
             .HasOne(x => x.FirstTeam)
-            .WithOne()
-            .HasForeignKey<Game>(x => x.FirstTeamId);
+            .WithMany()
+            .HasForeignKey(x => x.FirstTeamId)
+            .OnDelete(DeleteBehavior.Restrict);
         
         builder
             .HasOne(x => x.SecondTeam)
-            .WithOne()
-            .HasForeignKey<Game>(x => x.SecondTeamId);
+            .WithMany()
+            .HasForeignKey(x => x.SecondTeamId)
+            .OnDelete(DeleteBehavior.Restrict);
 
         builder
             .Property(x => x.GameResult)

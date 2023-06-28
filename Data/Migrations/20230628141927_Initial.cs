@@ -60,6 +60,27 @@ namespace Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "team_in_games",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    GameId = table.Column<long>(type: "bigint", nullable: false, comment: "Идентификатор игры"),
+                    TeamId = table.Column<long>(type: "bigint", nullable: false, comment: "Идентификатор команды"),
+                    TeamSide = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_team_in_games", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_team_in_games_teams_TeamId",
+                        column: x => x.TeamId,
+                        principalTable: "teams",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "character_in_teams",
                 columns: table => new
                 {
@@ -78,6 +99,12 @@ namespace Data.Migrations
                         principalTable: "heroes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_character_in_teams_team_in_games_TeamInGameId",
+                        column: x => x.TeamInGameId,
+                        principalTable: "team_in_games",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -94,33 +121,18 @@ namespace Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_games", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "team_in_games",
-                columns: table => new
-                {
-                    Id = table.Column<long>(type: "bigint", nullable: false, comment: "Идентификатор записи")
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    GameId = table.Column<long>(type: "bigint", nullable: false, comment: "Идентификатор игры"),
-                    TeamId = table.Column<long>(type: "bigint", nullable: false, comment: "Идентификатор команды"),
-                    TeamSide = table.Column<int>(type: "integer", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_team_in_games", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_team_in_games_games_GameId",
-                        column: x => x.GameId,
-                        principalTable: "games",
+                        name: "FK_games_team_in_games_FirstTeamId",
+                        column: x => x.FirstTeamId,
+                        principalTable: "team_in_games",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_team_in_games_teams_TeamId",
-                        column: x => x.TeamId,
-                        principalTable: "teams",
+                        name: "FK_games_team_in_games_SecondTeamId",
+                        column: x => x.SecondTeamId,
+                        principalTable: "team_in_games",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -136,14 +148,12 @@ namespace Data.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_games_FirstTeamId",
                 table: "games",
-                column: "FirstTeamId",
-                unique: true);
+                column: "FirstTeamId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_games_SecondTeamId",
                 table: "games",
-                column: "SecondTeamId",
-                unique: true);
+                column: "SecondTeamId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Players_TeamId",
@@ -151,53 +161,19 @@ namespace Data.Migrations
                 column: "TeamId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_team_in_games_GameId",
-                table: "team_in_games",
-                column: "GameId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_team_in_games_TeamId",
                 table: "team_in_games",
                 column: "TeamId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_character_in_teams_team_in_games_TeamInGameId",
-                table: "character_in_teams",
-                column: "TeamInGameId",
-                principalTable: "team_in_games",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_games_team_in_games_FirstTeamId",
-                table: "games",
-                column: "FirstTeamId",
-                principalTable: "team_in_games",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_games_team_in_games_SecondTeamId",
-                table: "games",
-                column: "SecondTeamId",
-                principalTable: "team_in_games",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_games_team_in_games_FirstTeamId",
-                table: "games");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_games_team_in_games_SecondTeamId",
-                table: "games");
-
             migrationBuilder.DropTable(
                 name: "character_in_teams");
+
+            migrationBuilder.DropTable(
+                name: "games");
 
             migrationBuilder.DropTable(
                 name: "Players");
@@ -207,9 +183,6 @@ namespace Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "team_in_games");
-
-            migrationBuilder.DropTable(
-                name: "games");
 
             migrationBuilder.DropTable(
                 name: "teams");

@@ -17,10 +17,10 @@ public class HeroesService: IHeroesService
         _dataContext = dataContext;
     }
 
-    public async Task<IEnumerable<HeroesDto>> GetCharacters()
+    public async Task<IEnumerable<HeroDto>> GetCharacters()
     {
         var heroes = await _dataContext.Heroes.ToListAsync();
-        var dtos = _mapper.Map<IEnumerable<HeroesDto>>(heroes);
+        var dtos = _mapper.Map<IEnumerable<HeroDto>>(heroes);
         return dtos;
     }
 

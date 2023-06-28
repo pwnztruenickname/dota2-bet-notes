@@ -9,5 +9,6 @@ public class TeamDtoMappingProfile : Profile
     public TeamDtoMappingProfile()
     {
         CreateMap<OpenApiTeamDto, Team>();
+        CreateMap<Team, TeamDto>();
     }
 }

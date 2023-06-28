@@ -4,7 +4,7 @@ namespace Application.Services.Heroes;
 
 public interface IHeroesService
 {
-    Task<IEnumerable<HeroesDto>> GetCharacters();
+    Task<IEnumerable<HeroDto>> GetCharacters();
 
     Task Sync(IEnumerable<OpenApiHeroDto> heroDtos);
 

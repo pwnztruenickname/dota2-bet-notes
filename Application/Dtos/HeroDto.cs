@@ -1,6 +1,9 @@
-namespace DotaStatistics.Contracts;
+namespace Application.Dtos;
 
-public class HeroContract
+/// <summary>
+/// Dto героия
+/// </summary>
+public class HeroDto
 {
     /// <summary>
     /// Идентификатор

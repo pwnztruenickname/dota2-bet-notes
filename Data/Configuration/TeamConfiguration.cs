@@ -9,7 +9,9 @@ public class TeamConfiguration: IEntityTypeConfiguration<Team>
     public void Configure(EntityTypeBuilder<Team> builder)
     {
         builder.ToTable("teams");
+        
         builder.Property(h => h.Id).UseIdentityByDefaultColumn().HasComment("Идентификатор записи");
+        builder.HasKey(h => h.Id);
         
         builder.Property(x => x.Name).HasComment("Наименование команды");
     }

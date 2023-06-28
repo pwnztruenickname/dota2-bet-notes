@@ -12,5 +12,7 @@ public class HeroDtoMappingProfile : Profile
         CreateMap<OpenApiHeroDto, Hero>()
             .IgnoreMember(x => x.Id)
             .MapMember(x => x.Name, x => x.Name.Replace("npc_dota_hero_", ""));
+
+        CreateMap<Hero, HeroDto>();
     }
 }
