@@ -24,7 +24,7 @@ export const NoteForm: FC = memo((props) => {
                 <>
                   <div key={field.key}>
                     <Form.Item name={[field.name, 'name']} className={s.title}>
-                      <Input />
+                      <Input placeholder={`Team ${i + 1}`}/>
                     </Form.Item>
                     <Form.List name={[field.name, 'heroes']}>
                       {(fields) => (
@@ -33,7 +33,8 @@ export const NoteForm: FC = memo((props) => {
                             <HeroSelect
                               key={hero.key}
                               heroes={HEROES_MOCK}
-                              name={hero.name}
+                              teamFieldName={field.name}
+                              fieldName={hero.name}
                               form={form}
                             />
                           ))}
@@ -47,7 +48,7 @@ export const NoteForm: FC = memo((props) => {
         </Form.List>
         <div>
           <Form.Item noStyle name="comment">
-            <TextArea rows={4}/>
+            <TextArea rows={4} placeholder="Comment"/>
           </Form.Item>
           <Button block className={s.button} htmlType="submit">Сохранить</Button>
         </div>
