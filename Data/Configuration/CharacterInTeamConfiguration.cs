@@ -11,6 +11,7 @@ public class CharacterInTeamConfiguration: IEntityTypeConfiguration<CharacterInT
         builder.ToTable("character_in_teams");
         
         builder.Property(h => h.Id).UseIdentityByDefaultColumn().HasComment("Идентификатор записи");
+        builder.HasKey(h => h.Id);
 
         builder.Property(x => x.CharacterId).HasComment("Связь с персонажем");
         builder.Property(x => x.TeamInGameId).HasComment("Связь персонажа с конкретным пиком");

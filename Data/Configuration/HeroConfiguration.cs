@@ -11,6 +11,7 @@ public class HeroConfiguration : IEntityTypeConfiguration<Hero>
         builder.ToTable("heroes");
 
         builder.Property(h => h.Id).UseIdentityByDefaultColumn().HasComment("Идентификатор записи");
+        builder.HasKey(h => h.Id);
         
         builder.Property(x => x.LocalizedName).HasComment("Наименование");
     }

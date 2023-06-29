@@ -80,11 +80,9 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FirstTeamId")
-                        .IsUnique();
+                    b.HasIndex("FirstTeamId");
 
-                    b.HasIndex("SecondTeamId")
-                        .IsUnique();
+                    b.HasIndex("SecondTeamId");
 
                     b.ToTable("games", (string)null);
                 });
@@ -160,8 +158,7 @@ namespace Data.Migrations
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasComment("Идентификатор записи");
+                        .HasColumnType("bigint");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
@@ -177,8 +174,6 @@ namespace Data.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("GameId");
 
                     b.HasIndex("TeamId");
 
@@ -205,15 +200,15 @@ namespace Data.Migrations
             modelBuilder.Entity("Data.Model.Game", b =>
                 {
                     b.HasOne("Data.Model.TeamInGame", "FirstTeam")
-                        .WithOne()
-                        .HasForeignKey("Data.Model.Game", "FirstTeamId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .WithMany()
+                        .HasForeignKey("FirstTeamId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Data.Model.TeamInGame", "SecondTeam")
-                        .WithOne()
-                        .HasForeignKey("Data.Model.Game", "SecondTeamId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .WithMany()
+                        .HasForeignKey("SecondTeamId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("FirstTeam");
@@ -234,19 +229,11 @@ namespace Data.Migrations
 
             modelBuilder.Entity("Data.Model.TeamInGame", b =>
                 {
-                    b.HasOne("Data.Model.Game", "Game")
-                        .WithMany()
-                        .HasForeignKey("GameId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Data.Model.Team", "Team")
                         .WithMany()
                         .HasForeignKey("TeamId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-
-                    b.Navigation("Game");
 
                     b.Navigation("Team");
                 });

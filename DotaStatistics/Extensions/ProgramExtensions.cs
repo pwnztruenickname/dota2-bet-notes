@@ -1,6 +1,6 @@
-using Application.Services.CharactersInTeam;
 using Application.Services.Games;
 using Application.Services.Heroes;
+using Application.Services.TeamInGame;
 using Application.Services.Teams;
 using Data;
 using DotaStatistics.External;
@@ -30,7 +30,7 @@ public static class ProgramExtensions
     public static void AddApplicationServices(this IServiceCollection service)
     {
         service
-            .AddTransient<ICharacterInTeamService, CharacterInTeamService>()
+            .AddTransient<ITeamInGameService, TeamInGameService>()
             .AddTransient<IGameService, GameService>()
             .AddTransient<IHeroesService, HeroesService>()
             .AddTransient<ITeamService, TeamService>()

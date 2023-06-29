@@ -9,7 +9,7 @@ namespace Data.Model;
 public class Game
 {
     public long Id { get; set; }
-    
+
     public TeamInGame FirstTeam { get; set; }
     
     public long FirstTeamId { get; set; }

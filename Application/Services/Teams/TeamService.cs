@@ -1,7 +1,9 @@
 using Application.Dtos;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Data;
 using Data.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Services.Teams;
 
@@ -22,5 +24,11 @@ public class TeamService : ITeamService
 
         await _dataContext.Teams.AddRangeAsync(teams);
         await _dataContext.SaveChangesAsync();
+    }
+
+    public async Task<IEnumerable<TeamDto>> GetAll()
+    {
+        var teamDtos = await _dataContext.Teams.ProjectTo<TeamDto>(_mapper.ConfigurationProvider).ToListAsync();
+        return teamDtos;
     }
 }

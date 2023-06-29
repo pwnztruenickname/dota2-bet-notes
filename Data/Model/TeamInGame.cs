@@ -9,10 +9,8 @@ public class TeamInGame
 {
     public long Id { get; set; }
     
-    public Game Game { get; set; }
-    
     public long GameId { get; set; }
-    
+
     public Team Team { get; set; }
     
     public long TeamId { get; set; }
