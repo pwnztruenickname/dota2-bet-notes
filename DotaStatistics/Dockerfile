@@ -8,6 +8,7 @@ WORKDIR /src
 COPY ["DotaStatistics/DotaStatistics.csproj", "DotaStatistics/"]
 COPY ["Application/Application.csproj", "Application/"]
 COPY ["Data/Data.csproj", "Data/"]
+COPY ["Core/Core.csproj", "Core/"]
 RUN dotnet restore "DotaStatistics/DotaStatistics.csproj"
 COPY . .
 WORKDIR "/src/DotaStatistics"
