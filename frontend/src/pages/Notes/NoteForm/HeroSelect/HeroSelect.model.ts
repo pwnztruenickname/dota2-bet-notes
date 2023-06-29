@@ -1,9 +1,8 @@
-import { FormInstance } from 'antd'
+import { SelectProps } from 'antd/es/select'
 import { DefaultOptionType } from 'rc-select/lib/Select'
 
-export interface HeroSelectProps {
-  heroes: (DefaultOptionType & { url: string })[]
-  teamFieldName: number
-  fieldName: number
-  form: FormInstance
-}
+export interface HeroSelectProps
+  extends Omit<
+    SelectProps<any, DefaultOptionType & { url: string }>,
+    'placeholder' | 'showSearch'
+  > {}

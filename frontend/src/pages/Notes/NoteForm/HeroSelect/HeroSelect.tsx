@@ -1,25 +1,20 @@
-import { Form, Select } from 'antd'
-import { useWatch } from 'antd/lib/form/Form'
+import { Select } from 'antd'
+import cn from 'classnames'
 import { FC, memo } from 'react'
 import { HeroSelectProps } from './HeroSelect.model'
 import s from './HeroSelect.module.scss'
 import mock from './mock.png'
 
 export const HeroSelect: FC<HeroSelectProps> = memo(
-  ({ heroes, teamFieldName, fieldName, form }) => {
-    const heroId = useWatch(
-      ['teams', teamFieldName, 'heroes', fieldName, 'heroId'],
-      form
-    )
-
+  ({ value, onChange, options, className, ...props }) => {
     return (
-      <div>
-        {heroId ? (
+      <div className={s.wrapper}>
+        {value ? (
           <div
             className={s.icon}
             style={{
               backgroundImage: `url(${
-                heroes.find(el => el.value === heroId)?.url
+                options?.find(el => el.value === value)?.url
               })`,
             }}
           />
@@ -29,9 +24,15 @@ export const HeroSelect: FC<HeroSelectProps> = memo(
           </div>
         )}
 
-        <Form.Item noStyle name={[fieldName, 'heroId']}>
-          <Select className={s.select} options={heroes} placeholder="Hero" />
-        </Form.Item>
+        <Select
+          className={cn(s.select, className)}
+          options={options}
+          placeholder="Hero"
+          onChange={onChange}
+          value={value}
+          showSearch
+          {...props}
+        />
       </div>
     )
   }

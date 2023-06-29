@@ -1,3 +1,4 @@
 export interface NoteFormProps {
-    onFinishCallback: () => void
+  onFinishCallback: () => void
+  heroes?: any[]
 }

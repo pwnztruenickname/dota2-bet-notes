@@ -1,5 +1,5 @@
-import { FC } from 'react'
-import { GAMES_MOCK } from '../../mock'
+import { FC, useEffect, useState } from 'react'
+import { GAMES_MOCK, HEROES_MOCK } from '../../mock'
 import { useElementVisible } from 'shared/hooks'
 import { Filters } from './Filters'
 import { Note } from './Note'
@@ -11,14 +11,22 @@ export const Notes: FC = () => {
     handleHideElement,
     handleShowElement,
   } = useElementVisible()
+  const [heroes, setHeroes] = useState<any[]>()
+
+  useEffect(() => {
+    setHeroes(HEROES_MOCK)
+  }, [])
 
   return (
     <>
       <Filters
         isVisible={elementVisible}
         onVisibleElement={handleShowElement}
+        heroes={heroes}
       />
-      {elementVisible && <NoteForm onFinishCallback={handleHideElement} />}
+      {elementVisible && (
+        <NoteForm onFinishCallback={handleHideElement} heroes={heroes} />
+      )}
       {GAMES_MOCK.map(el => (
         <Note game={el} key={el.id} />
       ))}
