@@ -1,61 +1,61 @@
 :root {
-    /* Base color */
-    --primary: #1e88e5;
-    --warning: #f9a825;
-    --danger: #ef5350;
-    --success: #66bb6a;
-    --disabled: #e0e0e0;
+  /* Base color */
+  --primary: #1e88e5;
+  --warning: #f9a825;
+  --danger: #ef5350;
+  --success: #66bb6a;
+  --disabled: #e0e0e0;
 
-    /* Text colors */
-    --font-default-color: #000000de;
-    --font-light-blue-color: #1976d2;
-    --font-grey-color: #a2a2a2;
+  /* Text colors */
+  --font-default-color: #000000de;
+  --font-light-blue-color: #1976d2;
+  --font-grey-color: #a2a2a2;
 
-    /* Background colors */
-    --background-color: #fff;
-    --background-block-color: #fff;
-    --background-grey-color: #efefed;
-    --background-light-grey-color: #f8f7f7;
+  /* Background colors */
+  --background-color: #fff;
+  --background-block-color: #fff;
+  --background-grey-color: #efefed;
+  --background-light-grey-color: #f8f7f7;
 
-    /* Border colors */
-    --border-grey-color: #acacac;
-    --border-block-grey-color: #eee;
+  /* Border colors */
+  --border-grey-color: #acacac;
+  --border-block-grey-color: #eee;
 
-    /* Scrollbar colors */
-    --scrollbar-track-color: #e0e0e0;
-    --scrollbar-thumb-color: #d6d6d6;
+  /* Scrollbar colors */
+  --scrollbar-track-color: #e0e0e0;
+  --scrollbar-thumb-color: #d6d6d6;
 
-    /* Tables colors */
-    --border-cell-grey-color: #dadada;
+  /* Tables colors */
+  --border-cell-grey-color: #dadada;
 }
 
 [data-theme='dark'] {
-    /* Base color */
-    --primary: #1964a7;
-    --warning: #bc7f1e;
-    --danger: #b2413f;
-    --success: #4d8c50;
-    --disabled: #e0e0e0;
+  /* Base color */
+  --primary: #1964a7;
+  --warning: #bc7f1e;
+  --danger: #b2413f;
+  --success: #4d8c50;
+  --disabled: #e0e0e0;
 
-    /* Text colors */
-    --font-default-color: #fff;
-    --font-light-blue-color: #90caf9;
-    --font-grey-color: #ffffff80;
+  /* Text colors */
+  --font-default-color: #fff;
+  --font-light-blue-color: #90caf9;
+  --font-grey-color: #ffffff80;
 
-    /* Background colors */
-    --background-color: #000;
-    --background-block-color: #212121;
-    --background-grey-color: #212121;
-    --background-light-grey-color: #2b2b2b;
+  /* Background colors */
+  --background-color: #000;
+  --background-block-color: #212121;
+  --background-grey-color: #212121;
+  --background-light-grey-color: #2b2b2b;
 
-    /* Border colors */
-    --border-grey-color: #6d6d6d;
-    --border-block-grey-color: #212121;
+  /* Border colors */
+  --border-grey-color: #6d6d6d;
+  --border-block-grey-color: #212121;
 
-    /* Scrollbar colors */
-    --scrollbar-track-color: #e0e0e0;
-    --scrollbar-thumb-color: #707070;
+  /* Scrollbar colors */
+  --scrollbar-track-color: #e0e0e0;
+  --scrollbar-thumb-color: #707070;
 
-    /* Tables colors */
-    --border-cell-grey-color: #525252;
+  /* Tables colors */
+  --border-cell-grey-color: #525252;
 }

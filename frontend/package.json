@@ -30,7 +30,7 @@
     "api:generate": "node swagger-codegen.js && prettier --write **/shared/api/api.ts",
     "lint": "eslint ./src --ext .ts,.tsx",
     "lint:fix": "eslint --fix ./src --ext .ts,.tsx",
-    "pretty": "prettier --write ./src"
+    "pretty": "prettier --write src/**/*.{ts,tsx,scss}"
   },
   "engines": {
     "node": "^18"

@@ -1,39 +1,39 @@
 import { useCallback, useState } from 'react'
 
 export interface UseElementVisibleResultProps {
-    elementVisible: boolean;
-    toggleElementVisible: () => void;
-    handleHideElement: () => void;
-    handleShowElement: () => void;
-    updateElementVisible: (value: boolean) => void;
+  elementVisible: boolean
+  toggleElementVisible: () => void
+  handleHideElement: () => void
+  handleShowElement: () => void
+  updateElementVisible: (value: boolean) => void
 }
 
-export function useElementVisible(
-    initialValue = false,
-): UseElementVisibleResultProps {
-    const [elementVisible, setElementVisible] = useState(initialValue)
+export const useElementVisible = (
+  initialValue = false
+): UseElementVisibleResultProps => {
+  const [elementVisible, setElementVisible] = useState(initialValue)
 
-    const toggleElementVisible = useCallback(() => {
-        setElementVisible((elementVisible) => !elementVisible)
-    }, [])
+  const toggleElementVisible = useCallback(() => {
+    setElementVisible(elementVisible => !elementVisible)
+  }, [])
 
-    const handleHideElement = useCallback(() => {
-        setElementVisible(false)
-    }, [])
+  const handleHideElement = useCallback(() => {
+    setElementVisible(false)
+  }, [])
 
-    const handleShowElement = useCallback(() => {
-        setElementVisible(true)
-    }, [])
+  const handleShowElement = useCallback(() => {
+    setElementVisible(true)
+  }, [])
 
-    const updateElementVisible = useCallback((visible: boolean) => {
-        setElementVisible(visible)
-    }, [])
+  const updateElementVisible = useCallback((visible: boolean) => {
+    setElementVisible(visible)
+  }, [])
 
-    return {
-        elementVisible,
-        toggleElementVisible,
-        handleHideElement,
-        handleShowElement,
-        updateElementVisible,
-    }
+  return {
+    elementVisible,
+    toggleElementVisible,
+    handleHideElement,
+    handleShowElement,
+    updateElementVisible,
+  }
 }
