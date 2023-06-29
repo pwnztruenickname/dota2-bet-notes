@@ -1,7 +1,7 @@
 import { Button, Form, Input, Space } from 'antd'
 import TextArea from 'antd/es/input/TextArea'
 import { useForm } from 'antd/lib/form/Form'
-import { FC, memo, useCallback } from 'react'
+import { FC, Fragment, memo, useCallback } from 'react'
 import { HEROES_MOCK } from '../../../mock'
 import { Block } from 'shared/components'
 import { HeroSelect } from './HeroSelect'
@@ -15,14 +15,15 @@ export const NoteForm: FC = memo((props) => {
   }, [])
 
   return (
-    <Form form={form} onFinish={handleFinish} initialValues={{ teams: [{ heroes: new Array(5).fill(undefined) }, { heroes: new Array(5).fill(undefined) }] }}>
+    <Form form={form} onFinish={handleFinish}
+          initialValues={{ teams: [{ heroes: new Array(5).fill(undefined) }, { heroes: new Array(5).fill(undefined) }] }}>
       <Block className={s.wrapper}>
         <Form.List name="teams">
           {(fields) => (
             <Space>
               {fields.map((field, i) => (
-                <>
-                  <div key={field.key}>
+                <Fragment key={field.key}>
+                  <div>
                     <Form.Item name={[field.name, 'name']} className={s.title}>
                       <Input placeholder={`Team ${i + 1}`}/>
                     </Form.Item>
@@ -42,7 +43,7 @@ export const NoteForm: FC = memo((props) => {
                     </Form.List>
                   </div>
                   {!i && <div>&mdash;</div>}
-                </>
+                </Fragment>
               ))}
             </Space>)}
         </Form.List>

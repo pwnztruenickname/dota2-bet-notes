@@ -26,11 +26,21 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "api:generate": "node swagger-codegen.js && prettier --write **/shared/api/api.ts",
+    "lint": "eslint ./src --ext .ts,.tsx",
+    "lint:fix": "eslint --fix ./src --ext .ts,.tsx",
+    "pretty": "prettier --write ./src"
   },
   "engines": {
     "node": "^18"
   },
+  "importSort": {
+        ".js, .jsx, .ts, .tsx": {
+            "style": "renke",
+            "parser": "typescript"
+        }
+    },
   "eslintConfig": {
     "extends": [
       "react-app",
