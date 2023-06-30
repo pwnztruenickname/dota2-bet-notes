@@ -101,4 +101,34 @@ export const HEROES_MOCK = [
     url:
       'https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/juggernaut.png',
   },
+  {
+    label: 'Герой7',
+    value: 7,
+    url:
+      'https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/ancient_apparition.png',
+  },
+  {
+    label: 'Герой8',
+    value: 8,
+    url:
+      'https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/bane.png',
+  },
+  {
+    label: 'Герой9',
+    value: 9,
+    url:
+      'https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/crystal_maiden.png',
+  },
+  {
+    label: 'Герой10',
+    value: 10,
+    url:
+      'https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/chen.png',
+  },
+  {
+    label: 'Герой11',
+    value: 11,
+    url:
+      'https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/doom_bringer.png',
+  },
 ]

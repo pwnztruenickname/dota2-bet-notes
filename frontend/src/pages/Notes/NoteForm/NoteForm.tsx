@@ -34,36 +34,33 @@ export const NoteForm: FC<NoteFormProps> = memo(
         <Block className={s.wrapper}>
           <Form.List name="teams">
             {fields => (
-              <Space>
-                {fields.map((field, i) => (
-                  <Fragment key={field.key}>
-                    <div>
-                      <Form.Item
-                        name={[field.name, 'name']}
-                        className={s.title}
-                      >
-                        <Input placeholder={`Team ${i + 1}`} />
-                      </Form.Item>
-                      <Form.List name={[field.name, 'heroes']}>
-                        {fields => (
-                          <ShouldUpdateChecker
-                            fieldPath={['teams', field.name, 'heroes']}
-                          >
-                            {({ getFieldValue }) => {
-                              const heroFields = getFieldValue([
-                                'teams',
-                                field.name,
-                                'heroes',
-                              ]).reduce(
-                                (acc: any, el: any) =>
-                                  el ? [...acc, el.heroId] : acc,
-                                []
-                              )
-                              const heroOptions = heroes?.map(el => ({
-                                ...el,
-                                disabled: heroFields.includes(el.value),
-                              }))
-                              return (
+              <ShouldUpdateChecker fieldPath="teams">
+                {({ getFieldValue }) => {
+                  const heroFields = getFieldValue('teams')
+                    .map((el: any) =>
+                      el.heroes.reduce(
+                        (acc: any, el: any) => (el ? [...acc, el.heroId] : acc),
+                        []
+                      )
+                    )
+                    .flat()
+                  const heroOptions = heroes?.map(el => ({
+                    ...el,
+                    disabled: heroFields.includes(el.value),
+                  }))
+                  return (
+                    <Space>
+                      {fields.map((field, i) => (
+                        <Fragment key={field.key}>
+                          <div>
+                            <Form.Item
+                              name={[field.name, 'name']}
+                              className={s.title}
+                            >
+                              <Input placeholder={`Team ${i + 1}`} />
+                            </Form.Item>
+                            <Form.List name={[field.name, 'heroes']}>
+                              {fields => (
                                 <Space>
                                   {fields.map(hero => (
                                     <Form.Item
@@ -75,16 +72,16 @@ export const NoteForm: FC<NoteFormProps> = memo(
                                     </Form.Item>
                                   ))}
                                 </Space>
-                              )
-                            }}
-                          </ShouldUpdateChecker>
-                        )}
-                      </Form.List>
-                    </div>
-                    {!i && <div>&mdash;</div>}
-                  </Fragment>
-                ))}
-              </Space>
+                              )}
+                            </Form.List>
+                          </div>
+                          {!i && <div>&mdash;</div>}
+                        </Fragment>
+                      ))}
+                    </Space>
+                  )
+                }}
+              </ShouldUpdateChecker>
             )}
           </Form.List>
           <div>
