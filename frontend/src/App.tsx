@@ -1,3 +1,4 @@
+import 'antd/dist/reset.css'
 import './styles/styles.css'
 import { FC } from 'react'
 import { Notes } from 'pages'
