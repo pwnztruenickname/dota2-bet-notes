@@ -3,7 +3,7 @@ import cn from 'classnames'
 import { FC, memo } from 'react'
 import { HeroSelectProps } from './HeroSelect.model'
 import s from './HeroSelect.module.scss'
-import mock from './mock.png'
+import mockImg from 'shared/img/mock.png'
 
 export const HeroSelect: FC<HeroSelectProps> = memo(
   ({ value, onChange, options, className, ...props }) => {
@@ -21,7 +21,7 @@ export const HeroSelect: FC<HeroSelectProps> = memo(
           />
         ) : (
           <div className={s.placeholder}>
-            <img src={mock} alt="" />
+            <img src={mockImg} alt="" />
           </div>
         )}
 
