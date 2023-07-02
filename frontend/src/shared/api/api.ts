@@ -5,32 +5,32 @@
 /** Generate by swagger-axios-codegen */
 /* eslint-disable */
 // @ts-nocheck
-import axiosStatic, { AxiosInstance, AxiosRequestConfig } from "axios";
+import axiosStatic, { AxiosInstance, AxiosRequestConfig } from 'axios'
 
 export interface IRequestOptions extends AxiosRequestConfig {
   /** only in axios interceptor config*/
-  loading?: boolean;
-  showError?: boolean;
+  loading?: boolean
+  showError?: boolean
 }
 
 export interface IRequestConfig {
-  method?: any;
-  headers?: any;
-  url?: any;
-  data?: any;
-  params?: any;
+  method?: any
+  headers?: any
+  url?: any
+  data?: any
+  params?: any
 }
 
 // Add options interface
 export interface ServiceOptions {
-  axios?: AxiosInstance;
+  axios?: AxiosInstance
   /** only in axios interceptor config*/
-  loading: boolean;
-  showError: boolean;
+  loading: boolean
+  showError: boolean
 }
 
 // Add default options
-export const serviceOptions: ServiceOptions = {};
+export const serviceOptions: ServiceOptions = {}
 
 // Instance selector
 export function axios(
@@ -42,13 +42,13 @@ export function axios(
     return serviceOptions.axios
       .request(configs)
       .then(res => {
-        resolve(res.data);
+        resolve(res.data)
       })
       .catch(err => {
-        reject(err);
-      });
+        reject(err)
+      })
   } else {
-    throw new Error("please inject yourself instance like axios  ");
+    throw new Error('please inject yourself instance like axios  ')
   }
 }
 
@@ -63,40 +63,40 @@ export function getConfigs(
     showError: serviceOptions.showError,
     ...options,
     method,
-    url
-  };
+    url,
+  }
   configs.headers = {
     ...options.headers,
-    "Content-Type": contentType
-  };
-  return configs;
+    'Content-Type': contentType,
+  }
+  return configs
 }
 
-export const basePath = "";
+export const basePath = ''
 
 export interface IList<T> extends Array<T> {}
 export interface List<T> extends Array<T> {}
 export interface IDictionary<TValue> {
-  [key: string]: TValue;
+  [key: string]: TValue
 }
 export interface Dictionary<TValue> extends IDictionary<TValue> {}
 
 export interface IListResult<T> {
-  items?: T[];
+  items?: T[]
 }
 
 export class ListResultDto<T> implements IListResult<T> {
-  items?: T[];
+  items?: T[]
 }
 
 export interface IPagedResult<T> extends IListResult<T> {
-  totalCount?: number;
-  items?: T[];
+  totalCount?: number
+  items?: T[]
 }
 
 export class PagedResultDto<T = any> implements IPagedResult<T> {
-  totalCount?: number;
-  items?: T[];
+  totalCount?: number
+  items?: T[]
 }
 
 // customer definition
@@ -104,116 +104,116 @@ export class PagedResultDto<T = any> implements IPagedResult<T> {
 
 export interface CharacterInTeamContract {
   /**  */
-  id?: number;
+  id?: number
 
   /**  */
-  gameRole?: GameRole;
+  gameRole?: GameRole
 
   /**  */
-  hero?: HeroContract;
+  hero?: HeroContract
 
   /**  */
-  characterId?: number;
+  characterId?: number
 
   /**  */
-  teamInGameId?: number;
+  teamInGameId?: number
 }
 
 export interface CharacterInTeamCreateContract {
   /**  */
-  id?: number;
+  id?: number
 
   /**  */
-  gameRole?: GameRole;
+  gameRole?: GameRole
 }
 
 export interface GameCreateContract {
   /**  */
-  firstTeam?: TeamInGameCreateContract;
+  firstTeam?: TeamInGameCreateContract
 
   /**  */
-  secondTeam?: TeamInGameCreateContract;
+  secondTeam?: TeamInGameCreateContract
 
   /**  */
-  comment?: string;
+  comment?: string
 
   /**  */
-  gameResult?: GameResult;
+  gameResult?: GameResult
 }
 
 export interface GameFullContract {
   /**  */
-  id?: number;
+  id?: number
 
   /**  */
-  firstTeam?: TeamInGameContract;
+  firstTeam?: TeamInGameContract
 
   /**  */
-  secondTeam?: TeamInGameContract;
+  secondTeam?: TeamInGameContract
 
   /**  */
-  comment?: string;
+  comment?: string
 
   /**  */
-  gameResult?: GameResult;
+  gameResult?: GameResult
 }
 
 export interface GameWithCharacterSetupSearchContract {
   /**  */
-  teamId?: number;
+  teamId?: number
 
   /**  */
-  setupCharacterIds?: number[];
+  setupCharacterIds?: number[]
 }
 
 export interface HeroContract {
   /**  */
-  id?: number;
+  id?: number
 
   /**  */
-  localizedName?: string;
+  localizedName?: string
 
   /**  */
-  name?: string;
+  name?: string
 }
 
 export interface SetGameCommentContract {
   /**  */
-  comment?: string;
+  comment?: string
 
   /**  */
-  gameId?: string;
+  gameId?: string
 }
 
 export interface TeamContract {
   /**  */
-  id?: number;
+  id?: number
 
   /**  */
-  name?: string;
+  name?: string
 }
 
 export interface TeamInGameContract {
   /**  */
-  teamSide?: TeamSide;
+  teamSide?: TeamSide
 
   /**  */
-  charactersInTeam?: CharacterInTeamContract[];
+  charactersInTeam?: CharacterInTeamContract[]
 }
 
 export interface TeamInGameCreateContract {
   /**  */
-  teamId?: number;
+  teamId?: number
 
   /**  */
-  teamSide?: TeamSide;
+  teamSide?: TeamSide
 
   /**  */
-  charactersInTeam?: CharacterInTeamCreateContract[];
+  charactersInTeam?: CharacterInTeamCreateContract[]
 }
 
-export type GameResult = 0 | 1;
+export type GameResult = 0 | 1
 
-export type GameRole = 0 | 1 | 2 | 3 | 4;
+export type GameRole = 0 | 1 | 2 | 3 | 4
 
-export type TeamSide = 0 | 1;
+export type TeamSide = 0 | 1
