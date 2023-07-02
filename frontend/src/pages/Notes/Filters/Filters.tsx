@@ -1,7 +1,6 @@
 import { Button, Form, Select, Space } from 'antd'
 import { FC, memo } from 'react'
-import { Block, ShouldUpdateChecker } from 'shared/components'
-import { HeroSelect } from '../NoteForm/HeroSelect'
+import { Block, ShouldUpdateChecker, HeroSelect } from 'shared/components'
 import { FiltersProps } from './Filters.model'
 import s from './Filters.module.scss'
 
@@ -36,7 +35,7 @@ export const Filters: FC<FiltersProps> = memo(
                           key={field.key}
                           name={[field.name, 'heroId']}
                         >
-                          <HeroSelect options={heroOptions} />
+                          <HeroSelect options={heroOptions} allowClear />
                         </Form.Item>
                       ))}
                     </Space>
