@@ -3,20 +3,24 @@ import TextArea from 'antd/es/input/TextArea'
 import { useForm } from 'antd/lib/form/Form'
 import { FC, Fragment, memo, useCallback } from 'react'
 import { Block, ShouldUpdateChecker, HeroSelect } from 'shared/components'
+import { api, GameCreateContract } from 'shared/api'
+import { useRequest } from 'shared/hooks'
 import { NoteFormProps } from './NoteForm.model'
 import s from './NoteForm.module.scss'
 
 export const NoteForm: FC<NoteFormProps> = memo(
   ({ onFinishCallback, heroes }) => {
     const [form] = useForm()
+    const { sendRequest } = useRequest(api.gameCreate)
 
-    // TODO: any
     const handleFinish = useCallback(
-      (values: any) => {
+      // TODO: переделать контракт создания (убрать id и тп)
+      async (values: GameCreateContract) => {
         console.log(values)
+        await sendRequest({})
         onFinishCallback()
       },
-      [onFinishCallback]
+      [onFinishCallback, sendRequest]
     )
 
     return (
@@ -36,16 +40,18 @@ export const NoteForm: FC<NoteFormProps> = memo(
               <ShouldUpdateChecker fieldPath="teams">
                 {({ getFieldValue }) => {
                   const heroFields = getFieldValue('teams')
-                    .map((el: any) =>
-                      el.heroes.reduce(
-                        (acc: any, el: any) => (el ? [...acc, el.heroId] : acc),
+                    // TODO: types
+                    .map((el: { heroes: { heroId: number }[] }) =>
+                      el.heroes.reduce<number[]>(
+                        (acc, el) => (el ? [...acc, el.heroId] : acc),
                         []
                       )
                     )
                     .flat()
                   const heroOptions = heroes?.map(el => ({
-                    ...el,
-                    disabled: heroFields.includes(el.value),
+                    label: el.localizedName,
+                    value: el.id,
+                    disabled: heroFields.includes(el.id),
                   }))
                   return (
                     <Space>

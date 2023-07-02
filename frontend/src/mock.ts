@@ -66,69 +66,58 @@ export const GAMES_MOCK = [
 
 export const HEROES_MOCK = [
   {
-    label: 'Герой1 Герой1 Герой1 Герой1 ',
-    value: 1,
-    url:
-      'https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/windrunner.png',
+    localizedName: 'Герой1 Герой1 Герой1 Герой1 ',
+    id: 1,
+    url: 'https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/windrunner.png',
   },
   {
-    label: 'Герой2',
-    value: 2,
-    url:
-      'https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/batrider.png',
+    localizedName: 'Герой2',
+    id: 2,
+    url: 'https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/batrider.png',
   },
   {
-    label: 'Герой3',
-    value: 3,
-    url:
-      'https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/oracle.png',
+    localizedName: 'Герой3',
+    id: 3,
+    url: 'https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/oracle.png',
   },
   {
-    label: 'Герой4',
-    value: 4,
-    url:
-      'https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/drow_ranger.png',
+    localizedName: 'Герой4',
+    id: 4,
+    url: 'https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/drow_ranger.png',
   },
   {
-    label: 'Герой5',
-    value: 5,
-    url:
-      'https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/witch_doctor.png',
+    localizedName: 'Герой5',
+    id: 5,
+    url: 'https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/witch_doctor.png',
   },
   {
-    label: 'Герой6',
-    value: 6,
-    url:
-      'https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/juggernaut.png',
+    localizedName: 'Герой6',
+    id: 6,
+    url: 'https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/juggernaut.png',
   },
   {
-    label: 'Герой7',
-    value: 7,
-    url:
-      'https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/ancient_apparition.png',
+    localizedName: 'Герой7',
+    id: 7,
+    url: 'https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/ancient_apparition.png',
   },
   {
-    label: 'Герой8',
-    value: 8,
-    url:
-      'https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/bane.png',
+    localizedName: 'Герой8',
+    id: 8,
+    url: 'https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/bane.png',
   },
   {
-    label: 'Герой9',
-    value: 9,
-    url:
-      'https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/crystal_maiden.png',
+    localizedName: 'Герой9',
+    id: 9,
+    url: 'https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/crystal_maiden.png',
   },
   {
-    label: 'Герой10',
-    value: 10,
-    url:
-      'https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/chen.png',
+    localizedName: 'Герой10',
+    id: 10,
+    url: 'https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/chen.png',
   },
   {
-    label: 'Герой11',
-    value: 11,
-    url:
-      'https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/doom_bringer.png',
+    localizedName: 'Герой11',
+    id: 11,
+    url: 'https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/doom_bringer.png',
   },
 ]

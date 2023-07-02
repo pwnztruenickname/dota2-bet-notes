@@ -1,32 +1,56 @@
 import { Button, Form, Select, Space } from 'antd'
-import { FC, memo } from 'react'
+import { FC, memo, useCallback } from 'react'
 import { Block, ShouldUpdateChecker, HeroSelect } from 'shared/components'
-import { FiltersProps } from './Filters.model'
+import { api } from 'shared/api'
+import { useRequest } from 'shared/hooks'
+import { FiltersProps, FormValuesProps } from './Filters.model'
 import s from './Filters.module.scss'
 
 export const Filters: FC<FiltersProps> = memo(
   ({ onVisibleElement, isVisible, heroes }) => {
+    // TODO: наверно POST?
+    const { sendRequest } = useRequest(api.gameSearchByCharactersSetupList)
+
+    const handleFinish = useCallback(
+      async ({ teamId, heroes }: FormValuesProps) => {
+        await sendRequest({
+          teamId,
+          setupCharacterIds: heroes.reduce<number[]>(
+            (acc, el) => (el ? [...acc, el?.heroId] : acc),
+            []
+          ),
+        })
+      },
+      [sendRequest]
+    )
+
     return (
       <Block className={s.wrapper}>
         <Button onClick={onVisibleElement} disabled={isVisible}>
           Новый матч
         </Button>
-        <Form
+        <Form<FormValuesProps>
           initialValues={{ heroes: new Array(5).fill(undefined) }}
           layout="inline"
           className={s.form}
+          onFinish={handleFinish}
         >
           <Form.List name="heroes">
             {fields => (
               <ShouldUpdateChecker fieldPath="heroes">
                 {({ getFieldValue }) => {
-                  const heroFields = getFieldValue('heroes').reduce(
-                    (acc: any, el: any) => (el ? [...acc, el.heroId] : acc),
+                  // TODO: types
+                  const heroFields = (
+                    getFieldValue('heroes') as { heroId: number }[]
+                  )?.reduce<number[]>(
+                    (acc, el) => (el ? [...acc, el.heroId] : acc),
                     []
                   )
                   const heroOptions = heroes?.map(el => ({
-                    ...el,
-                    disabled: heroFields.includes(el.value),
+                    label: el.localizedName,
+                    value: el.id,
+                    // TODO: id может быть undefined?
+                    disabled: heroFields.includes(el.id!),
                   }))
                   return (
                     <Space size={0}>
@@ -45,7 +69,7 @@ export const Filters: FC<FiltersProps> = memo(
             )}
           </Form.List>
           <div>
-            <Form.Item name="team" className={s.team}>
+            <Form.Item name="teamId" className={s.team}>
               <Select placeholder="Team name" showSearch />
             </Form.Item>
             <Button type="primary" htmlType="submit" block className={s.button}>

@@ -1,20 +1,23 @@
-import { FC, useEffect, useState } from 'react'
-import { GAMES_MOCK, HEROES_MOCK } from '../../mock'
-import { useElementVisible } from 'shared/hooks'
+import { FC, useEffect } from 'react'
+import { useElementVisible, useRequest } from 'shared/hooks'
+import { api } from 'shared/api'
 import { Filters } from './Filters'
 import { Note } from './Note'
 import { NoteForm } from './NoteForm'
 
 export const Notes: FC = () => {
-  const {
-    elementVisible,
-    handleHideElement,
-    handleShowElement,
-  } = useElementVisible()
-  const [heroes, setHeroes] = useState<any[]>()
+  const { elementVisible, handleHideElement, handleShowElement } =
+    useElementVisible()
+  const { sendRequest: senGamesRequest, response: games } = useRequest(
+    api.gameAllList
+  )
+  const { sendRequest: senHeroesRequest, response: heroes } = useRequest(
+    api.heroList
+  )
 
   useEffect(() => {
-    setHeroes(HEROES_MOCK)
+    senHeroesRequest()
+    senGamesRequest()
   }, [])
 
   return (
@@ -27,9 +30,8 @@ export const Notes: FC = () => {
       {elementVisible && (
         <NoteForm onFinishCallback={handleHideElement} heroes={heroes} />
       )}
-      {GAMES_MOCK.map(el => (
-        <Note game={el} key={el.id} />
-      ))}
+      {heroes &&
+        games?.map(el => <Note game={el} key={el.id} heroes={heroes} />)}
     </>
   )
 }

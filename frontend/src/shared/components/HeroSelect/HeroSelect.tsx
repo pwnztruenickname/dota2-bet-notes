@@ -14,7 +14,8 @@ export const HeroSelect: FC<HeroSelectProps> = memo(
             className={s.icon}
             style={{
               backgroundImage: `url(${
-                options?.find(el => el.value === value)?.url
+                ''
+                // options?.find(el => el.value === value)?.url
               })`,
             }}
           />

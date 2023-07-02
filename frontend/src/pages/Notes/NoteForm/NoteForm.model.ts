@@ -1,4 +1,6 @@
+import { HeroContract } from 'shared/api'
+
 export interface NoteFormProps {
   onFinishCallback: () => void
-  heroes?: any[]
+  heroes?: HeroContract[]
 }

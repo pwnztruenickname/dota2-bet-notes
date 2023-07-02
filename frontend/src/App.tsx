@@ -1,10 +1,11 @@
 import 'antd/dist/reset.css'
 import './styles/index.scss'
 import Icon from '@ant-design/icons'
-import { ConfigProvider, FloatButton, Layout, theme } from 'antd'
+import { ConfigProvider, FloatButton, theme } from 'antd'
 import { FC, useCallback, useEffect, useState } from 'react'
 import { Notes } from 'pages'
 import { ReactComponent as MoonIcon } from 'shared/img/moon-icon.svg'
+import { Layout } from 'core/components'
 
 type ThemeModeType = 'dark' | 'light'
 
@@ -29,6 +30,7 @@ export const App: FC = () => {
       setThemeMode(storedTheme as ThemeModeType)
     }
   }, [])
+
   return (
     <ConfigProvider
       theme={{
@@ -39,13 +41,11 @@ export const App: FC = () => {
       }}
     >
       <Layout>
-        <Layout.Content>
-          <Notes />
-          <FloatButton
-            onClick={toggleTheme}
-            icon={<Icon component={MoonIcon} />}
-          />
-        </Layout.Content>
+        <Notes />
+        <FloatButton
+          onClick={toggleTheme}
+          icon={<Icon component={MoonIcon} />}
+        />
       </Layout>
     </ConfigProvider>
   )

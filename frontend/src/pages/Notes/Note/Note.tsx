@@ -1,26 +1,28 @@
 import { Space, Typography } from 'antd'
 import { FC, memo } from 'react'
-import { HEROES_MOCK } from '../../../mock'
 import { Block } from 'shared/components'
 import { HeroItem } from './HeroItem'
 import { NoteProps } from './Note.model'
 import s from './Note.module.scss'
 
-export const Note: FC<NoteProps> = memo(({ game }) => {
+export const Note: FC<NoteProps> = memo(({ game, heroes }) => {
   return (
     <Block className={s.wrapper}>
-      {/*TODO: any*/}
-      {game.teams.map((team: any, i: number) => (
-        <Space key={team.id}>
+      {/*TODO: команды могут быть undefined?*/}
+      {[game.firstTeam!, game.secondTeam!].map((team, i) => (
+        // TODO: расширить id команды?
+        <Space key={i}>
           <div>
             <Typography.Title level={3} className={s.title}>
-              {team.name}
+              {/*TODO: название команды?*/}
+              {team.teamSide}
             </Typography.Title>
             <Space>
-              {team.heroes.map((hero: any) => (
+              {/*TODO: charactersInTeam могут быть undefined?*/}
+              {team.charactersInTeam!.map(hero => (
                 <HeroItem
-                  hero={HEROES_MOCK.find(el => el.value === hero)}
-                  key={hero}
+                  hero={heroes.find(el => el.id === hero.id)}
+                  key={hero.id}
                 />
               ))}
             </Space>

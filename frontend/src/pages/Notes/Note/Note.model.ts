@@ -1,4 +1,6 @@
+import { GameFullContract, HeroContract } from 'shared/api'
+
 export interface NoteProps {
-  // TODO: any
-  game: any
+  game: GameFullContract
+  heroes: HeroContract[]
 }

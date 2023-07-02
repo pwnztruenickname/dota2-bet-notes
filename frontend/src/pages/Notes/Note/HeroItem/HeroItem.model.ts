@@ -1,4 +1,5 @@
+import { HeroContract } from 'shared/api'
+
 export interface HeroItemProps {
-  // TODO: any
-  hero: any
+  hero?: HeroContract
 }
