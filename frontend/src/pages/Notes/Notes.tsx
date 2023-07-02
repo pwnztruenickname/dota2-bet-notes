@@ -1,6 +1,6 @@
 import { FC, useEffect } from 'react'
-import { useElementVisible, useRequest } from 'shared/hooks'
 import { api } from 'shared/api'
+import { useElementVisible, useRequest } from 'shared/hooks'
 import { Filters } from './Filters'
 import { Note } from './Note'
 import { NoteForm } from './NoteForm'

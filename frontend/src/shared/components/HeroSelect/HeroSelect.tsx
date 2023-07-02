@@ -1,9 +1,9 @@
+import { FC, memo } from 'react'
 import { Select } from 'antd'
 import cn from 'classnames'
-import { FC, memo } from 'react'
+import mockImg from 'shared/img/mock.png'
 import { HeroSelectProps } from './HeroSelect.model'
 import s from './HeroSelect.module.scss'
-import mockImg from 'shared/img/mock.png'
 
 export const HeroSelect: FC<HeroSelectProps> = memo(
   ({ value, onChange, options, className, ...props }) => {

@@ -1,7 +1,7 @@
 import { FC, memo } from 'react'
 import { Form } from 'antd'
-import { shouldFormFieldUpdate } from './ShouldUpdateChecker.utils'
 import { ShouldUpdateCheckerProps } from './ShouldUpdateChecker.model'
+import { shouldFormFieldUpdate } from './ShouldUpdateChecker.utils'
 
 export const ShouldUpdateChecker: FC<ShouldUpdateCheckerProps> = memo(
   ({ fieldPath, children }) => (

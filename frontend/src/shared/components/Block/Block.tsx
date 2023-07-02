@@ -1,8 +1,8 @@
 import { FC, PropsWithChildren, memo } from 'react'
+import { theme } from 'antd'
 import cn from 'classnames'
 import { BlockProps } from './Block.model'
 import styles from './Block.module.scss'
-import { theme } from 'antd'
 
 export const Block: FC<PropsWithChildren<BlockProps>> = memo(props => {
   const { children, className, style } = props

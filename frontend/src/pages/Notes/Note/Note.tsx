@@ -1,5 +1,5 @@
-import { Space, Typography } from 'antd'
 import { FC, memo } from 'react'
+import { Space, Typography } from 'antd'
 import { Block } from 'shared/components'
 import { HeroItem } from './HeroItem'
 import { NoteProps } from './Note.model'
