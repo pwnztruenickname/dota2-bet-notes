@@ -1,0 +1,17 @@
+@import './consts';
+
+body {
+    font-family: $fonts;
+}
+
+a {
+    text-decoration: none;
+}
+
+p,
+div,
+tr,
+th,
+span, a {
+    font-size: $default_font_size;
+}
