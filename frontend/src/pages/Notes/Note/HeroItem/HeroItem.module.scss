@@ -1,3 +1,7 @@
+.wrapper {
+  width: 100px;
+}
+
 .icon {
   height: 60px;
   background: no-repeat center / cover;
@@ -6,7 +10,6 @@
 }
 
 .name {
-  width: 100px;
   text-align: center;
   text-overflow: ellipsis;
   overflow: hidden;

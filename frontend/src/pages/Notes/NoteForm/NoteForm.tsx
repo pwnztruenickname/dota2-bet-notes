@@ -1,4 +1,4 @@
-import { Button, Form, Input, Space } from 'antd'
+import { Button, Form, Input, Space, Typography } from 'antd'
 import TextArea from 'antd/es/input/TextArea'
 import { useForm } from 'antd/lib/form/Form'
 import { FC, Fragment, memo, useCallback } from 'react'
@@ -74,7 +74,7 @@ export const NoteForm: FC<NoteFormProps> = memo(
                               )}
                             </Form.List>
                           </div>
-                          {!i && <div>&mdash;</div>}
+                          {!i && <Typography.Text>&mdash;</Typography.Text>}
                         </Fragment>
                       ))}
                     </Space>

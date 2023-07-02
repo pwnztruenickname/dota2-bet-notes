@@ -1,3 +1,6 @@
+import { CSSProperties } from 'react'
+
 export interface BlockProps {
-    className?: string;
+  className?: string
+  style?: CSSProperties
 }

@@ -1,4 +1,4 @@
-import { Space } from 'antd'
+import { Space, Typography } from 'antd'
 import { FC, memo } from 'react'
 import { HEROES_MOCK } from '../../../mock'
 import { Block } from 'shared/components'
@@ -13,7 +13,9 @@ export const Note: FC<NoteProps> = memo(({ game }) => {
       {game.teams.map((team: any, i: number) => (
         <Space key={team.id}>
           <div>
-            <h2 className={s.title}>{team.name}</h2>
+            <Typography.Title level={3} className={s.title}>
+              {team.name}
+            </Typography.Title>
             <Space>
               {team.heroes.map((hero: any) => (
                 <HeroItem
@@ -23,10 +25,10 @@ export const Note: FC<NoteProps> = memo(({ game }) => {
               ))}
             </Space>
           </div>
-          {!i && <div>&mdash;</div>}
+          {!i && <Typography.Text>&mdash;</Typography.Text>}
         </Space>
       ))}
-      <div className={s.comment}>{game.comment}</div>
+      <Typography.Text className={s.comment}>{game.comment}</Typography.Text>
     </Block>
   )
 })
