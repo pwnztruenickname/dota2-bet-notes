@@ -1,5 +1,6 @@
 using Application.Services.Games;
 using Application.Services.Heroes;
+using Application.Services.Migrations;
 using Application.Services.TeamInGame;
 using Application.Services.Teams;
 using Data;
@@ -34,6 +35,7 @@ public static class ProgramExtensions
             .AddTransient<IGameService, GameService>()
             .AddTransient<IHeroesService, HeroesService>()
             .AddTransient<ITeamService, TeamService>()
+            .AddTransient<IMigrationService, MigrationService>()
             ;
     }
 }

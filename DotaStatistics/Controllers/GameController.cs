@@ -19,7 +19,7 @@ public class GameController : ControllerBase
         _mapper = mapper;
     }
 
-    [HttpGet("search-by-characters-setup")]
+    [HttpPost("search-by-characters-setup")]
     [ProducesResponseType(typeof(IEnumerable<GameFullContract>), StatusCodes.Status200OK)]
     public async Task<IEnumerable<GameFullContract>> SearchByCharactersSetup(
         [FromBody] GameWithCharacterSetupSearchContract searchContract)

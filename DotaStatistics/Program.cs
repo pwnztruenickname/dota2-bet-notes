@@ -1,4 +1,5 @@
 using Application.Mapping;
+using Application.Services.Migrations;
 using DotaStatistics.Extensions;
 using DotaStatistics.Mapping;
 
@@ -13,12 +14,13 @@ builder.Services.AddApplicationServices();
 
 var app = builder.Build();
 
-app.MapControllers();
+//Применяем миграции 
+await using var scope = app.Services.CreateAsyncScope();
+var migratorService = scope.ServiceProvider.GetRequiredService<IMigrationService>();
+await migratorService.MigrateAsync();
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.MapControllers();
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.Run();
