@@ -43,7 +43,7 @@ public class GameController : ControllerBase
     [ProducesResponseType(typeof(IEnumerable<GameFullContract>), StatusCodes.Status200OK)]
     public async Task<IEnumerable<GameFullContract>> GetAll()
     {
-        var gameDtos = _gameService.GetAll();
+        var gameDtos = await _gameService.GetAll();
 
         var contracts = _mapper.Map<IEnumerable<GameFullContract>>(gameDtos);
         return contracts;

@@ -2,11 +2,16 @@ using Application.Mapping;
 using Application.Services.Migrations;
 using DotaStatistics.Extensions;
 using DotaStatistics.Mapping;
+using Newtonsoft.Json.Converters;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+     .AddNewtonsoftJson(opts => opts.SerializerSettings.Converters.Add(new StringEnumConverter()));
+// builder.Services.ConfigureHttpJsonOptions(options => options.SerializerOptions.Converters.Add(new JsonStringEnumConverter()));
+
 builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGenNewtonsoftSupport();
 builder.Services.AddDatabase(builder.Configuration);
 builder.Services.AddRefit();
 builder.Services.AddAutoMapper(typeof(HeroContractMappingProfile).Assembly, typeof(HeroDtoMappingProfile).Assembly);
@@ -18,6 +23,7 @@ var app = builder.Build();
 await using var scope = app.Services.CreateAsyncScope();
 var migratorService = scope.ServiceProvider.GetRequiredService<IMigrationService>();
 await migratorService.MigrateAsync();
+
 
 app.MapControllers();
 app.UseSwagger();
