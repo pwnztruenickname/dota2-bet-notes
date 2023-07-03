@@ -11,6 +11,8 @@ public class GameContractMappingProfile: Profile
         CreateMap<GameFullDto, GameFullContract>();
         CreateMap<TeamInGameDto, TeamInGameContract>();
         CreateMap<CharacterInTeamDto, CharacterInTeamContract>();
+
+        CreateMap<TeamInGameDto, TeamInGameContract>();
         
         CreateMap<GameWithCharacterSetupSearchContract, GameWithCharacterSetupSearchDto>();
         
