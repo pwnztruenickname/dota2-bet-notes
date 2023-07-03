@@ -1,7 +1,7 @@
 import { FC, memo } from 'react'
 import { Select } from 'antd'
 import cn from 'classnames'
-import mockImg from 'shared/img/mock.png'
+import { HEROES_IMG_URL } from 'shared/consts'
 import { HeroSelectProps } from './HeroSelect.model'
 import s from './HeroSelect.module.scss'
 
@@ -13,16 +13,13 @@ export const HeroSelect: FC<HeroSelectProps> = memo(
           <div
             className={s.icon}
             style={{
-              backgroundImage: `url(${
-                ''
-                // options?.find(el => el.value === value)?.url
+              backgroundImage: `url(${HEROES_IMG_URL}${
+                options?.find(el => el.value === value)?.key
               })`,
             }}
           />
         ) : (
-          <div className={s.placeholder}>
-            <img src={mockImg} alt="" />
-          </div>
+          <div className={s.placeholder} />
         )}
 
         <Select

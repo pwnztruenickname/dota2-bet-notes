@@ -8,16 +8,20 @@ import { NoteForm } from './NoteForm'
 export const Notes: FC = () => {
   const { elementVisible, handleHideElement, handleShowElement } =
     useElementVisible()
-  const { sendRequest: senGamesRequest, response: games } = useRequest(
+  const { sendRequest: sendGamesRequest, response: games } = useRequest(
     api.gameAllList
   )
-  const { sendRequest: senHeroesRequest, response: heroes } = useRequest(
+  const { sendRequest: sendHeroesRequest, response: heroes } = useRequest(
     api.heroList
+  )
+  const { sendRequest: sendTeamsRequest, response: teams } = useRequest(
+    api.teamList
   )
 
   useEffect(() => {
-    senHeroesRequest()
-    senGamesRequest()
+    sendHeroesRequest()
+    sendTeamsRequest()
+    sendGamesRequest()
   }, [])
 
   return (
@@ -26,9 +30,14 @@ export const Notes: FC = () => {
         isVisible={elementVisible}
         onVisibleElement={handleShowElement}
         heroes={heroes}
+        teams={teams}
       />
       {elementVisible && (
-        <NoteForm onFinishCallback={handleHideElement} heroes={heroes} />
+        <NoteForm
+          onFinishCallback={handleHideElement}
+          heroes={heroes}
+          teams={teams}
+        />
       )}
       {heroes &&
         games?.map(el => <Note game={el} key={el.id} heroes={heroes} />)}

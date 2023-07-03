@@ -2,16 +2,13 @@
   min-height: 120px;
   display: flex;
   gap: 10px;
+  background: url('../../../shared/img/sides.jpg') no-repeat center / cover;
 }
 
-.title {
+.team {
   text-align: center;
-  margin-bottom: 10px;
-
-  input {
-    width: 300px;
-    text-align: center;
-  }
+  margin: 0 auto 10px;
+  width: 300px;
 }
 
 .buttons {

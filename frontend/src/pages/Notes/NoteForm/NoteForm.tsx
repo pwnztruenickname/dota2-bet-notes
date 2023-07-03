@@ -1,20 +1,19 @@
 import { FC, Fragment, memo, useCallback } from 'react'
-import { Button, Form, Input, Space, Typography } from 'antd'
+import { Button, Form, Select, Space, Typography } from 'antd'
 import TextArea from 'antd/es/input/TextArea'
 import { useForm } from 'antd/lib/form/Form'
 import { api, GameCreateContract } from 'shared/api'
 import { Block, ShouldUpdateChecker, HeroSelect } from 'shared/components'
 import { useRequest } from 'shared/hooks'
-import { NoteFormProps } from './NoteForm.model'
+import { NoteFormProps, NoteFormValuesProps } from './NoteForm.model'
 import s from './NoteForm.module.scss'
 
 export const NoteForm: FC<NoteFormProps> = memo(
-  ({ onFinishCallback, heroes }) => {
+  ({ onFinishCallback, heroes, teams }) => {
     const [form] = useForm()
     const { sendRequest } = useRequest(api.gameCreate)
 
     const handleFinish = useCallback(
-      // TODO: переделать контракт создания (убрать id и тп)
       async (values: GameCreateContract) => {
         console.log(values)
         await sendRequest({})
@@ -24,7 +23,7 @@ export const NoteForm: FC<NoteFormProps> = memo(
     )
 
     return (
-      <Form
+      <Form<NoteFormValuesProps>
         form={form}
         onFinish={handleFinish}
         initialValues={{
@@ -40,8 +39,7 @@ export const NoteForm: FC<NoteFormProps> = memo(
               <ShouldUpdateChecker fieldPath="teams">
                 {({ getFieldValue }) => {
                   const heroFields = getFieldValue('teams')
-                    // TODO: types
-                    .map((el: { heroes: { heroId: number }[] }) =>
+                    .map((el: NoteFormValuesProps['teams']) =>
                       el.heroes.reduce<number[]>(
                         (acc, el) => (el ? [...acc, el.heroId] : acc),
                         []
@@ -59,10 +57,16 @@ export const NoteForm: FC<NoteFormProps> = memo(
                         <Fragment key={field.key}>
                           <div>
                             <Form.Item
-                              name={[field.name, 'name']}
-                              className={s.title}
+                              name={[field.name, 'teamId']}
+                              className={s.team}
                             >
-                              <Input placeholder={`Team ${i + 1}`} />
+                              <Select
+                                placeholder={`Team ${i + 1}`}
+                                options={teams?.map(el => ({
+                                  label: el.name,
+                                  value: el.id,
+                                }))}
+                              />
                             </Form.Item>
                             <Form.List name={[field.name, 'heroes']}>
                               {fields => (
