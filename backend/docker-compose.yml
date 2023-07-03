@@ -6,11 +6,11 @@ services:
       - "database"
     build:
       context: .
-      dockerfile: ./DotaStatistics/Dockerfile
+      dockerfile: ./Dockerfile
     ports:
-      - "5000:80"
+      - "8000:80"
     environment:
-      ASPNETCORE_ENVIRONMENT: "local"
+      ASPNETCORE_ENVIRONMENT: "Local"
       
   database:
     image: postgres:12
