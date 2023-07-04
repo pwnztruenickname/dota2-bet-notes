@@ -1,6 +1,7 @@
 .wrapper {
   min-height: 120px;
   display: flex;
+  justify-content: space-around;
   gap: 10px;
   background: url('../../../shared/img/sides.jpg') no-repeat center / cover;
 }

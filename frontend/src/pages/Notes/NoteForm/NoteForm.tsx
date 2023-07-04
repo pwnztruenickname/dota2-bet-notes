@@ -2,8 +2,13 @@ import { FC, Fragment, memo, useCallback } from 'react'
 import { Button, Form, Select, Space, Typography } from 'antd'
 import TextArea from 'antd/es/input/TextArea'
 import { useForm } from 'antd/lib/form/Form'
-import { api, GameCreateContract } from 'shared/api'
-import { Block, ShouldUpdateChecker, HeroSelect } from 'shared/components'
+import {
+  api,
+  CharacterInTeamCreateContract,
+  TeamInGameCreateContract,
+  TeamSide,
+} from 'shared/api'
+import { Block, HeroSelect, ShouldUpdateChecker } from 'shared/components'
 import { useRequest } from 'shared/hooks'
 import { NoteFormProps, NoteFormValuesProps } from './NoteForm.model'
 import s from './NoteForm.module.scss'
@@ -14,10 +19,24 @@ export const NoteForm: FC<NoteFormProps> = memo(
     const { sendRequest } = useRequest(api.gameCreate)
 
     const handleFinish = useCallback(
-      async (values: GameCreateContract) => {
-        console.log(values)
-        await sendRequest({})
-        onFinishCallback()
+      async ({ teams, ...values }: NoteFormValuesProps) => {
+        const teamsData: TeamInGameCreateContract[] = teams.map(
+          ({ teamId, heroes }, i) => ({
+            teamId,
+            charactersInTeam: heroes.reduce<CharacterInTeamCreateContract[]>(
+              (acc, el) => (el ? [...acc, { id: el.heroId }] : acc),
+              []
+            ),
+            teamSide: i ? TeamSide.Dire : TeamSide.Ancient,
+          })
+        )
+        sendRequest({
+          ...values,
+          firstTeam: teamsData[0],
+          secondTeam: teamsData[1],
+        }).then(() => {
+          onFinishCallback()
+        })
       },
       [onFinishCallback, sendRequest]
     )
@@ -38,8 +57,11 @@ export const NoteForm: FC<NoteFormProps> = memo(
             {fields => (
               <ShouldUpdateChecker fieldPath="teams">
                 {({ getFieldValue }) => {
-                  const heroFields = getFieldValue('teams')
-                    .map((el: NoteFormValuesProps['teams']) =>
+                  const fieldsValue = getFieldValue(
+                    'teams'
+                  ) as NoteFormValuesProps['teams']
+                  const heroFields = fieldsValue
+                    .map(el =>
                       el.heroes.reduce<number[]>(
                         (acc, el) => (el ? [...acc, el.heroId] : acc),
                         []
@@ -49,7 +71,9 @@ export const NoteForm: FC<NoteFormProps> = memo(
                   const heroOptions = heroes?.map(el => ({
                     label: el.localizedName,
                     value: el.id,
-                    disabled: heroFields.includes(el.id),
+                    key: el.name,
+                    // TODO: убрать required
+                    disabled: heroFields.includes(el.id!),
                   }))
                   return (
                     <Space>
@@ -65,7 +89,11 @@ export const NoteForm: FC<NoteFormProps> = memo(
                                 options={teams?.map(el => ({
                                   label: el.name,
                                   value: el.id,
+                                  disabled: fieldsValue.some(
+                                    team => team?.teamId === el.id
+                                  ),
                                 }))}
+                                showSearch
                               />
                             </Form.Item>
                             <Form.List name={[field.name, 'heroes']}>

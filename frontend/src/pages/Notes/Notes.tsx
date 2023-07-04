@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react'
+import { FC, useCallback, useEffect } from 'react'
 import { api } from 'shared/api'
 import { useElementVisible, useRequest } from 'shared/hooks'
 import { Filters } from './Filters'
@@ -18,6 +18,11 @@ export const Notes: FC = () => {
     api.teamList
   )
 
+  const handleFinish = useCallback(async () => {
+    handleHideElement()
+    await sendGamesRequest()
+  }, [handleHideElement, sendGamesRequest])
+
   useEffect(() => {
     sendHeroesRequest()
     sendTeamsRequest()
@@ -34,7 +39,7 @@ export const Notes: FC = () => {
       />
       {elementVisible && (
         <NoteForm
-          onFinishCallback={handleHideElement}
+          onFinishCallback={handleFinish}
           heroes={heroes}
           teams={teams}
         />

@@ -13,5 +13,5 @@ export interface NoteFormValuesProps
     heroes: {
       heroId: number
     }[]
-  }
+  }[]
 }

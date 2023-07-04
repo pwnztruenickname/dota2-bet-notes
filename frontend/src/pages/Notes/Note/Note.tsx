@@ -6,6 +6,7 @@ import { NoteProps } from './Note.model'
 import s from './Note.module.scss'
 
 export const Note: FC<NoteProps> = memo(({ game, heroes }) => {
+  console.log(game)
   return (
     <Block className={s.wrapper}>
       {/*TODO: убрать required*/}

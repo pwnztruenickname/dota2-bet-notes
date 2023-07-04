@@ -15,7 +15,7 @@ export const HeroSelect: FC<HeroSelectProps> = memo(
             style={{
               backgroundImage: `url(${HEROES_IMG_URL}${
                 options?.find(el => el.value === value)?.key
-              })`,
+              }.png)`,
             }}
           />
         ) : (
@@ -29,6 +29,7 @@ export const HeroSelect: FC<HeroSelectProps> = memo(
           onChange={onChange}
           value={value}
           showSearch
+          popupMatchSelectWidth={false}
           {...props}
         />
       </div>
