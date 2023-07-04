@@ -41,7 +41,7 @@ await using var scope = app.Services.CreateAsyncScope();
 var migratorService = scope.ServiceProvider.GetRequiredService<IMigrationService>();
 await migratorService.MigrateAsync();
 
-
+app.UseCors("AllowAll");
 app.MapControllers();
 app.UseSwagger();
 app.UseSwaggerUI();
