@@ -4,5 +4,5 @@ namespace Application.Services.TeamInGame;
 
 public interface ITeamInGameService
 {
-    Task<IEnumerable<long>> GetGameIdsByCharacterSetup(GameWithCharacterSetupSearchDto setupSearchDto);
+    Task<IEnumerable<long>> GetTeamInGameIdsByCharacterSetup(GameWithCharacterSetupSearchDto setupSearchDto);
 }

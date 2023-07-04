@@ -23,10 +23,11 @@ public class GameService: IGameService
 
     public async Task<IEnumerable<GameFullDto>> GetGamesByCharactersSetup(GameWithCharacterSetupSearchDto searchDto)
     {
-        var gameIds = await _teamInGameService.GetGameIdsByCharacterSetup(searchDto);
+        var teamInGameIds = await _teamInGameService.GetTeamInGameIdsByCharacterSetup(searchDto);
+        var ids = teamInGameIds.ToList();
 
         var games = await _dataContext.Games
-            .Where(x => gameIds.Contains(x.Id))
+            .Where(x => ids.Contains(x.FirstTeamId) || ids.Contains(x.SecondTeamId))
             .ProjectTo<GameFullDto>(_mapper.ConfigurationProvider)
             .ToListAsync();
 

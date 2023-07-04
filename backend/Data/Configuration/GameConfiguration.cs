@@ -10,8 +10,8 @@ public class GameConfiguration : IEntityTypeConfiguration<Game>
     {
         builder.ToTable("games");
         
-        builder.Property(h => h.Id).UseIdentityByDefaultColumn().HasComment("Идентификатор записи");
-        builder.HasKey(h => h.Id);
+        builder.Property(h => h.Id).UseIdentityByDefaultColumn();
+        builder.Property(h => h.Id).HasComment("Идентификатор записи");
 
         builder.Property(x => x.FirstTeamId).HasComment("Идентификатор пиков первой команды");
         builder.Property(x => x.SecondTeamId).HasComment("Идентификатор пиков первой команды");

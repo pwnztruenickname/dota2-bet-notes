@@ -1,5 +1,6 @@
 using Application.Dtos;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Data;
 using Data.Model;
 using Microsoft.EntityFrameworkCore;
@@ -19,9 +20,10 @@ public class HeroesService: IHeroesService
 
     public async Task<IEnumerable<HeroDto>> GetCharacters()
     {
-        var heroes = await _dataContext.Heroes.ToListAsync();
-        var dtos = _mapper.Map<IEnumerable<HeroDto>>(heroes);
-        return dtos;
+        var heroes = await _dataContext.Heroes.OrderBy(x => x.LocalizedName)
+            .ProjectTo<HeroDto>(_mapper.ConfigurationProvider).ToListAsync();
+        
+        return heroes;
     }
 
     public async Task Sync(IEnumerable<OpenApiHeroDto> heroDtos)
