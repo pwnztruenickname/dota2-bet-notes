@@ -14,7 +14,7 @@ public class TeamInGameService: ITeamInGameService
         _dataContext = dataContext;
     }
 
-    public async Task<IEnumerable<long>> GetGameIdsByCharacterSetup(GameWithCharacterSetupSearchDto setupSearchDto)
+    public async Task<IEnumerable<long>> GetTeamInGameIdsByCharacterSetup(GameWithCharacterSetupSearchDto setupSearchDto)
     {
         var test = _dataContext.TeamInGames.WhereIf(setupSearchDto.TeamId.HasValue,
             x => x.TeamId == setupSearchDto.TeamId);
@@ -22,9 +22,7 @@ public class TeamInGameService: ITeamInGameService
         foreach (var characterId in setupSearchDto.SetupCharacterIds)
             test = test.Where(x => x.CharactersInTeam.Select(cit => cit.CharacterId).Contains(characterId));
 
-        var gameIds = await test.Select(x => x.GameId).ToListAsync();
-        return gameIds;
+        var teamInGameId = await test.Select(x => x.Id).ToListAsync();
+        return teamInGameId;
     }
-    
-    // husk sniper mk ck pudge    vs    p1 p2 p3 p4 p5        mk ck vs p1 p3
 }

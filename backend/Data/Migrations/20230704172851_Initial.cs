@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
@@ -63,7 +63,7 @@ namespace Data.Migrations
                 name: "team_in_games",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<long>(type: "bigint", nullable: false, comment: "Идентификатор записи")
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     GameId = table.Column<long>(type: "bigint", nullable: false, comment: "Идентификатор игры"),
                     TeamId = table.Column<long>(type: "bigint", nullable: false, comment: "Идентификатор команды"),

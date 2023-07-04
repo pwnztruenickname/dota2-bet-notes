@@ -28,7 +28,8 @@ public class TeamService : ITeamService
 
     public async Task<IEnumerable<TeamDto>> GetAll()
     {
-        var teamDtos = await _dataContext.Teams.ProjectTo<TeamDto>(_mapper.ConfigurationProvider).ToListAsync();
+        var teamDtos = await _dataContext.Teams.ProjectTo<TeamDto>(_mapper.ConfigurationProvider)
+            .ToListAsync();
         return teamDtos;
     }
 }

@@ -20,7 +20,7 @@ public class TeamInGameServiceTests : DiTestBase<ITeamInGameService>
         var service = GetTestingService();
         
         //Act
-        var gameIds = await service.GetGameIdsByCharacterSetup(new GameWithCharacterSetupSearchDto
+        var gameIds = await service.GetTeamInGameIdsByCharacterSetup(new GameWithCharacterSetupSearchDto
             { TeamId = 1, SetupCharacterIds = new[] { 1L, 2, 3 } });
         
         //Assert
