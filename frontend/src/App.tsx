@@ -1,11 +1,11 @@
 import 'antd/dist/reset.css'
 import './styles/index.scss'
+import { FC, useCallback, useEffect, useState } from 'react'
 import Icon from '@ant-design/icons'
 import { ConfigProvider, FloatButton, theme } from 'antd'
-import { FC, useCallback, useEffect, useState } from 'react'
+import { Layout } from 'core/components'
 import { Notes } from 'pages'
 import { ReactComponent as MoonIcon } from 'shared/img/moon-icon.svg'
-import { Layout } from 'core/components'
 
 type ThemeModeType = 'dark' | 'light'
 

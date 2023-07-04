@@ -1,5 +1,5 @@
-import { Spin } from 'antd'
 import { FC, PropsWithChildren, memo, useCallback, useState } from 'react'
+import { Spin } from 'antd'
 import { LoaderContext } from './LoaderContext'
 
 export const LoaderContextProvider: FC<PropsWithChildren> = memo(props => {

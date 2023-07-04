@@ -1,15 +1,14 @@
-import { Button, Form, Select, Space } from 'antd'
 import { FC, memo, useCallback } from 'react'
-import { Block, ShouldUpdateChecker, HeroSelect } from 'shared/components'
+import { Button, Form, Select, Space } from 'antd'
 import { api } from 'shared/api'
+import { Block, ShouldUpdateChecker, HeroSelect } from 'shared/components'
 import { useRequest } from 'shared/hooks'
 import { FiltersProps, FormValuesProps } from './Filters.model'
 import s from './Filters.module.scss'
 
 export const Filters: FC<FiltersProps> = memo(
-  ({ onVisibleElement, isVisible, heroes }) => {
-    // TODO: наверно POST?
-    const { sendRequest } = useRequest(api.gameSearchByCharactersSetupList)
+  ({ onVisibleElement, isVisible, heroes, teams }) => {
+    const { sendRequest } = useRequest(api.gameSearchByCharactersSetupCreate)
 
     const handleFinish = useCallback(
       async ({ teamId, heroes }: FormValuesProps) => {
@@ -39,9 +38,8 @@ export const Filters: FC<FiltersProps> = memo(
             {fields => (
               <ShouldUpdateChecker fieldPath="heroes">
                 {({ getFieldValue }) => {
-                  // TODO: types
                   const heroFields = (
-                    getFieldValue('heroes') as { heroId: number }[]
+                    getFieldValue('heroes') as FormValuesProps['heroes']
                   )?.reduce<number[]>(
                     (acc, el) => (el ? [...acc, el.heroId] : acc),
                     []
@@ -49,7 +47,8 @@ export const Filters: FC<FiltersProps> = memo(
                   const heroOptions = heroes?.map(el => ({
                     label: el.localizedName,
                     value: el.id,
-                    // TODO: id может быть undefined?
+                    key: el.name,
+                    // TODO: убрать required
                     disabled: heroFields.includes(el.id!),
                   }))
                   return (
@@ -70,7 +69,14 @@ export const Filters: FC<FiltersProps> = memo(
           </Form.List>
           <div>
             <Form.Item name="teamId" className={s.team}>
-              <Select placeholder="Team name" showSearch />
+              <Select
+                placeholder="Team name"
+                showSearch
+                options={teams?.map(el => ({
+                  label: el.name,
+                  value: el.id,
+                }))}
+              />
             </Form.Item>
             <Button type="primary" htmlType="submit" block className={s.button}>
               Поиск

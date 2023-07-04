@@ -1,5 +1,5 @@
-import Paragraph from 'antd/es/typography/Paragraph'
 import { FC, memo } from 'react'
+import Paragraph from 'antd/es/typography/Paragraph'
 import { HeroItemProps } from './HeroItem.model'
 import s from './HeroItem.module.scss'
 

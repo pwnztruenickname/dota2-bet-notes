@@ -1,7 +1,7 @@
-import { Store } from 'antd/es/form/interface'
-import { get, isEqual } from 'lodash'
-import { NamePath } from 'antd/lib/form/interface'
 import { Key } from 'react'
+import { Store } from 'antd/es/form/interface'
+import { NamePath } from 'antd/lib/form/interface'
+import { get, isEqual } from 'lodash'
 
 export const isPlainArray = (arr: NamePath[]) =>
   !arr.some(el => Array.isArray(el) || typeof el === 'object')
