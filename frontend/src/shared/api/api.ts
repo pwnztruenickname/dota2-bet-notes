@@ -29,7 +29,7 @@ export interface CharacterInTeamCreateContract {
 export interface GameCreateContract {
   firstTeam?: TeamInGameCreateContract
   secondTeam?: TeamInGameCreateContract
-  comment?: string | null
+  comment?: string
   gameResult?: GameResult
 }
 
@@ -38,7 +38,7 @@ export interface GameFullContract {
   id?: number
   firstTeam?: TeamInGameContract
   secondTeam?: TeamInGameContract
-  comment?: string | null
+  comment?: string
   gameResult?: GameResult
 }
 
@@ -58,38 +58,38 @@ export enum GameRole {
 export interface GameWithCharacterSetupSearchContract {
   /** @format int64 */
   teamId?: number | null
-  setupCharacterIds?: number[] | null
+  setupCharacterIds?: number[]
 }
 
 export interface HeroContract {
   /** @format int64 */
   id?: number
-  localizedName?: string | null
-  name?: string | null
+  localizedName?: string
+  name?: string
 }
 
 export interface SetGameCommentContract {
-  comment?: string | null
-  gameId?: string | null
+  comment?: string
+  gameId?: string
 }
 
 export interface TeamContract {
   /** @format int64 */
   id?: number
-  name?: string | null
+  name?: string
 }
 
 export interface TeamInGameContract {
   team?: TeamContract
   teamSide?: TeamSide
-  charactersInTeam?: CharacterInTeamContract[] | null
+  charactersInTeam?: CharacterInTeamContract[]
 }
 
 export interface TeamInGameCreateContract {
   /** @format int64 */
   teamId?: number
   teamSide?: TeamSide
-  charactersInTeam?: CharacterInTeamCreateContract[] | null
+  charactersInTeam?: CharacterInTeamCreateContract[]
 }
 
 export enum TeamSide {
