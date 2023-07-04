@@ -36,7 +36,7 @@ public class TeamController: ControllerBase
     [ProducesResponseType(typeof(IEnumerable<TeamContract>), StatusCodes.Status200OK)]
     public async Task<IEnumerable<TeamContract>> GetAll()
     {
-        var teamDtos = _teamService.GetAll();
+        var teamDtos = await _teamService.GetAll();
 
         var contracts = _mapper.Map<IEnumerable<TeamContract>>(teamDtos);
         return contracts;

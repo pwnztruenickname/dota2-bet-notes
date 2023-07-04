@@ -10,7 +10,24 @@ builder.Services.AddControllers()
      .AddNewtonsoftJson(opts => opts.SerializerSettings.Converters.Add(new StringEnumConverter()));
 // builder.Services.ConfigureHttpJsonOptions(options => options.SerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+     options.SupportNonNullableReferenceTypes();
+});
+
+builder.Services.AddCors(options =>
+{
+     options.AddPolicy("AllowAll",
+          corsPolicyBuilder =>
+          {
+               corsPolicyBuilder
+                    .AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+          });
+
+});
+
 builder.Services.AddSwaggerGenNewtonsoftSupport();
 builder.Services.AddDatabase(builder.Configuration);
 builder.Services.AddRefit();
