@@ -70,6 +70,7 @@ export const Filters: FC<FiltersProps> = memo(
           <div>
             <Form.Item name="teamId" className={s.team}>
               <Select
+                optionFilterProp="label"
                 placeholder="Team name"
                 showSearch
                 options={teams?.map(el => ({

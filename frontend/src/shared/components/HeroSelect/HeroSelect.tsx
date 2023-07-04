@@ -30,6 +30,7 @@ export const HeroSelect: FC<HeroSelectProps> = memo(
           value={value}
           showSearch
           popupMatchSelectWidth={false}
+          optionFilterProp="label"
           {...props}
         />
       </div>
