@@ -1,0 +1,17 @@
+.wrapper {
+  width: 100px;
+}
+
+.icon {
+  height: 60px;
+  background: no-repeat center / cover;
+  margin-bottom: 5px;
+  border-radius: 6px;
+}
+
+.name {
+  text-align: center;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}

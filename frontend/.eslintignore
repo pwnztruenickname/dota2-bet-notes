@@ -1,0 +1,4 @@
+__global.d.ts
+*.js
+*.test.*
+react-app-env.d.ts
