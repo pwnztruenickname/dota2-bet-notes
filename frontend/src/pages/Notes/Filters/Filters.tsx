@@ -69,6 +69,7 @@ export const Filters: FC<FiltersProps> = memo(
                 optionFilterProp="label"
                 placeholder="Team name"
                 showSearch
+                allowClear
                 options={teams?.map(el => ({
                   label: el.name,
                   value: el.id,
