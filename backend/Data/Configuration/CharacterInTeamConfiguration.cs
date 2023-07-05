@@ -10,9 +10,8 @@ public class CharacterInTeamConfiguration: IEntityTypeConfiguration<CharacterInT
     {
         builder.ToTable("character_in_teams");
 
-        builder.Property(h => h.Id).UseIdentityByDefaultColumn();
-        builder.Property(h => h.Id).HasComment("Идентификатор записи");
-
+        builder.Property(h => h.Id).ValueGeneratedOnAdd().UseIdentityColumn().IsRequired();
+        
         builder.Property(x => x.CharacterId).HasComment("Связь с персонажем");
         builder.Property(x => x.TeamInGameId).HasComment("Связь персонажа с конкретным пиком");
         

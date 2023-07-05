@@ -10,8 +10,7 @@ public class TeamInGameConfiguration: IEntityTypeConfiguration<TeamInGame>
     {
         builder.ToTable("team_in_games");
 
-        builder.Property(h => h.Id).UseIdentityByDefaultColumn();
-        builder.Property(h => h.Id).HasComment("Идентификатор записи");
+        builder.Property(h => h.Id).ValueGeneratedOnAdd().UseIdentityColumn().IsRequired();
         
         builder.Property(x => x.GameId).HasComment("Идентификатор игры");
         builder.Property(x => x.TeamId).HasComment("Идентификатор команды");

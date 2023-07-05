@@ -1,4 +1,4 @@
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
@@ -15,7 +15,7 @@ namespace Data.Migrations
                 name: "heroes",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false, comment: "Идентификатор записи")
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     LocalizedName = table.Column<string>(type: "text", nullable: false, comment: "Наименование"),
                     Name = table.Column<string>(type: "text", nullable: false)
@@ -29,7 +29,7 @@ namespace Data.Migrations
                 name: "teams",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false, comment: "Идентификатор записи")
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "text", nullable: false, comment: "Наименование команды")
                 },
@@ -63,7 +63,7 @@ namespace Data.Migrations
                 name: "team_in_games",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false, comment: "Идентификатор записи")
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     GameId = table.Column<long>(type: "bigint", nullable: false, comment: "Идентификатор игры"),
                     TeamId = table.Column<long>(type: "bigint", nullable: false, comment: "Идентификатор команды"),
@@ -84,7 +84,7 @@ namespace Data.Migrations
                 name: "character_in_teams",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false, comment: "Идентификатор записи")
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     GameRole = table.Column<string>(type: "text", nullable: false, comment: "Игровая роль"),
                     CharacterId = table.Column<long>(type: "bigint", nullable: false, comment: "Связь с персонажем"),
@@ -111,7 +111,7 @@ namespace Data.Migrations
                 name: "games",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false, comment: "Идентификатор записи")
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     FirstTeamId = table.Column<long>(type: "bigint", nullable: false, comment: "Идентификатор пиков первой команды"),
                     SecondTeamId = table.Column<long>(type: "bigint", nullable: false, comment: "Идентификатор пиков первой команды"),

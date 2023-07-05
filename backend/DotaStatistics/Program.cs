@@ -36,10 +36,13 @@ builder.Services.AddApplicationServices();
 
 var app = builder.Build();
 
-//Применяем миграции 
-await using var scope = app.Services.CreateAsyncScope();
-var migratorService = scope.ServiceProvider.GetRequiredService<IMigrationService>();
-await migratorService.MigrateAsync();
+if (!app.Environment.IsDevelopment())
+{
+     //Применяем миграции 
+     await using var scope = app.Services.CreateAsyncScope();
+     var migratorService = scope.ServiceProvider.GetRequiredService<IMigrationService>();
+     await migratorService.MigrateAsync();
+}
 
 app.UseCors("AllowAll"); 
 app.MapControllers();
