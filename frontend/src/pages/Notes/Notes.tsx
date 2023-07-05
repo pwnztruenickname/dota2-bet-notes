@@ -24,13 +24,13 @@ export const Notes: FC = () => {
 
   const handleFinish = useCallback(async () => {
     handleHideElement()
-    await sendGamesRequest({})
+    await sendGamesRequest({ teamId: null, setupCharacterIds: [] })
   }, [handleHideElement, sendGamesRequest])
 
   useEffect(() => {
     sendHeroesRequest()
     sendTeamsRequest()
-    sendGamesRequest({})
+    sendGamesRequest({ teamId: null, setupCharacterIds: [] })
   }, [])
 
   return (
