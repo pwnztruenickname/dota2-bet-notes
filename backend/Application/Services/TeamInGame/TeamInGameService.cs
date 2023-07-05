@@ -19,8 +19,9 @@ public class TeamInGameService: ITeamInGameService
         var test = _dataContext.TeamInGames.WhereIf(setupSearchDto.TeamId.HasValue,
             x => x.TeamId == setupSearchDto.TeamId);
 
-        foreach (var characterId in setupSearchDto.SetupCharacterIds)
-            test = test.Where(x => x.CharactersInTeam.Select(cit => cit.CharacterId).Contains(characterId));
+        if(setupSearchDto.SetupCharacterIds.Any())
+            foreach (var characterId in setupSearchDto.SetupCharacterIds)
+                test = test.Where(x => x.CharactersInTeam.Select(cit => cit.CharacterId).Contains(characterId));
 
         var teamInGameId = await test.Select(x => x.Id).ToListAsync();
         return teamInGameId;
