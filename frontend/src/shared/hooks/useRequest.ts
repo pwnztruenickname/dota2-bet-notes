@@ -8,7 +8,7 @@ interface UseRequestReturnType<T, K> {
 }
 
 export const useRequest = <T = any, K = any>(
-  requestFn: (params: T) => Promise<AxiosResponse<K>>
+  requestFn: (data: T) => Promise<AxiosResponse<K>>
 ): UseRequestReturnType<T, K> => {
   const { setLoader } = useContext(LoaderContext)
   const [response, setResponse] = useState<K>()

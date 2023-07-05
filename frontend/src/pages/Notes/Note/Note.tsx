@@ -6,7 +6,6 @@ import { NoteProps } from './Note.model'
 import s from './Note.module.scss'
 
 export const Note: FC<NoteProps> = memo(({ game, heroes }) => {
-  console.log(game)
   return (
     <Block className={s.wrapper}>
       {/*TODO: убрать required*/}
@@ -21,8 +20,9 @@ export const Note: FC<NoteProps> = memo(({ game, heroes }) => {
             <Space>
               {/*TODO: убрать required*/}
               {team.charactersInTeam!.map(hero => (
+                // TODO : убрать required
                 <HeroItem
-                  hero={heroes.find(el => el.id === hero.id)}
+                  hero={heroes.find(el => el.id === hero.hero!.id)}
                   key={hero.id}
                 />
               ))}

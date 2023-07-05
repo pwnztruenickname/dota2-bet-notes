@@ -7,6 +7,7 @@ import {
 export interface FiltersProps {
   isVisible: boolean
   onVisibleElement: () => void
+  onSendGamesRequest: (values: GameWithCharacterSetupSearchContract) => void
   heroes?: HeroContract[]
   teams?: TeamContract[]
 }

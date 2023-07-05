@@ -36,6 +36,9 @@ export const App: FC = () => {
       theme={{
         token: {
           fontFamily: 'IBM Plex Sans, sans-serif',
+          colorBgLayout: '#1c1c1c',
+          colorBgBase: '#111111',
+          colorPrimaryBg: '#1f1f1f',
         },
         algorithm: themeMode == 'dark' ? darkAlgorithm : defaultAlgorithm,
       }}

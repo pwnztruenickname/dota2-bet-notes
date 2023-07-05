@@ -85,6 +85,7 @@ export const NoteForm: FC<NoteFormProps> = memo(
                               className={s.team}
                             >
                               <Select
+                                optionFilterProp="label"
                                 placeholder={`Team ${i + 1}`}
                                 options={teams?.map(el => ({
                                   label: el.name,

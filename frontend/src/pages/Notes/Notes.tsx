@@ -1,5 +1,5 @@
 import { FC, useCallback, useEffect } from 'react'
-import { api } from 'shared/api'
+import { api, GameWithCharacterSetupSearchContract } from 'shared/api'
 import { useElementVisible, useRequest } from 'shared/hooks'
 import { Filters } from './Filters'
 import { Note } from './Note'
@@ -8,9 +8,9 @@ import { NoteForm } from './NoteForm'
 export const Notes: FC = () => {
   const { elementVisible, handleHideElement, handleShowElement } =
     useElementVisible()
-  const { sendRequest: sendGamesRequest, response: games } = useRequest(
-    api.gameAllList
-  )
+  // const { sendRequest: sendGamesRequest, response: games } = useRequest(
+  //   api.gameAllList
+  // )
   const { sendRequest: sendHeroesRequest, response: heroes } = useRequest(
     api.heroList
   )
@@ -18,15 +18,19 @@ export const Notes: FC = () => {
     api.teamList
   )
 
+  const { sendRequest: sendGamesRequest, response: games } = useRequest(
+    api.gameSearchByCharactersSetupCreate
+  )
+
   const handleFinish = useCallback(async () => {
     handleHideElement()
-    await sendGamesRequest()
+    await sendGamesRequest({})
   }, [handleHideElement, sendGamesRequest])
 
   useEffect(() => {
     sendHeroesRequest()
     sendTeamsRequest()
-    sendGamesRequest()
+    sendGamesRequest({})
   }, [])
 
   return (
@@ -36,6 +40,7 @@ export const Notes: FC = () => {
         onVisibleElement={handleShowElement}
         heroes={heroes}
         teams={teams}
+        onSendGamesRequest={sendGamesRequest}
       />
       {elementVisible && (
         <NoteForm

@@ -1,18 +1,14 @@
 import { FC, memo, useCallback } from 'react'
 import { Button, Form, Select, Space } from 'antd'
-import { api } from 'shared/api'
 import { Block, ShouldUpdateChecker, HeroSelect } from 'shared/components'
-import { useRequest } from 'shared/hooks'
 import { FiltersProps, FormValuesProps } from './Filters.model'
 import s from './Filters.module.scss'
 
 export const Filters: FC<FiltersProps> = memo(
-  ({ onVisibleElement, isVisible, heroes, teams }) => {
-    const { sendRequest } = useRequest(api.gameSearchByCharactersSetupCreate)
-
+  ({ onVisibleElement, isVisible, heroes, teams, onSendGamesRequest }) => {
     const handleFinish = useCallback(
       async ({ teamId, heroes }: FormValuesProps) => {
-        await sendRequest({
+        await onSendGamesRequest({
           teamId,
           setupCharacterIds: heroes.reduce<number[]>(
             (acc, el) => (el ? [...acc, el?.heroId] : acc),
@@ -20,7 +16,7 @@ export const Filters: FC<FiltersProps> = memo(
           ),
         })
       },
-      [sendRequest]
+      [onSendGamesRequest]
     )
 
     return (
