@@ -10,8 +10,7 @@ public class HeroConfiguration : IEntityTypeConfiguration<Hero>
     {
         builder.ToTable("heroes");
 
-        builder.Property(h => h.Id).UseIdentityByDefaultColumn();
-        builder.Property(h => h.Id).HasComment("Идентификатор записи");
+        builder.Property(h => h.Id).ValueGeneratedOnAdd().UseIdentityColumn().IsRequired();
         
         builder.Property(x => x.LocalizedName).HasComment("Наименование");
     }

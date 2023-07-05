@@ -16,6 +16,7 @@ public class GameDtoMappingProfile : Profile
         CreateMap<GameCreateDto, Game>();
         CreateMap<TeamInGameCreateDto, TeamInGame>();
         CreateMap<CharacterInTeamCreateDto, CharacterInTeam>()
-            .MapMember(x => x.CharacterId, x => x.Id);
+            .MapMember(x => x.CharacterId, x => x.Id)
+            .IgnoreMember(x => x.Id);
     }
 }

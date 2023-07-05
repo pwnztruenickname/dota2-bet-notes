@@ -62,7 +62,7 @@ public class GameService: IGameService
     public async Task Create(GameCreateDto createDto)
     {
         var game = _mapper.Map<Game>(createDto);
-
+        
         await _dataContext.AddAsync(game);
         await _dataContext.SaveChangesAsync();
     }
