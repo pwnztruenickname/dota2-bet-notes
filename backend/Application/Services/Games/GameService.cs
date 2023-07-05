@@ -23,15 +23,22 @@ public class GameService: IGameService
 
     public async Task<IEnumerable<GameFullDto>> GetGamesByCharactersSetup(GameWithCharacterSetupSearchDto searchDto)
     {
-        var teamInGameIds = await _teamInGameService.GetTeamInGameIdsByCharacterSetup(searchDto);
-        var ids = teamInGameIds.ToList();
+        var gamesSearchQuery = _dataContext.Games.AsQueryable();
 
-        var games = await _dataContext.Games
-            .Where(x => ids.Contains(x.FirstTeamId) || ids.Contains(x.SecondTeamId))
-            .ProjectTo<GameFullDto>(_mapper.ConfigurationProvider)
+        if (searchDto.SetupCharacterIds?.Any() ?? false)
+        {
+            var teamInGameIds = await _teamInGameService.GetTeamInGameIdsByCharacterSetup(searchDto);
+            var ids = teamInGameIds.ToList();
+            
+            if(ids.Any())
+                gamesSearchQuery = gamesSearchQuery
+                    .Where(x => ids.Contains(x.FirstTeamId) || ids.Contains(x.SecondTeamId));
+        }
+        
+        var result = await gamesSearchQuery.ProjectTo<GameFullDto>(_mapper.ConfigurationProvider)
             .ToListAsync();
-
-        return games;
+        
+        return result;
     }
 
     public async Task SetComment(SetGameCommentDto commentDto)
