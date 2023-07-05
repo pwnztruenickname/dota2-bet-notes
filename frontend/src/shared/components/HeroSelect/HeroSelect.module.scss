@@ -1,0 +1,22 @@
+.wrapper {
+  width: 100px;
+}
+
+.placeholder {
+  text-align: center;
+  height: 60px;
+  margin-bottom: 5px;
+  background: url("../../../shared/img/mock.png") no-repeat center / contain;
+}
+
+.icon {
+  height: 60px;
+  background: no-repeat center / cover;
+  margin-bottom: 5px;
+  border-radius: 6px;
+  box-shadow: 0 0 6px 2px #fff;
+}
+
+.select {
+  width: 100%;
+}
