@@ -1,6 +1,6 @@
 import { FC, PropsWithChildren, memo } from 'react'
 import { Layout as AntdLayout } from 'antd'
-import s from './Layout.module.css'
+import s from './Layout.module.scss'
 
 export const Layout: FC<PropsWithChildren> = memo(({ children }) => {
   return (
