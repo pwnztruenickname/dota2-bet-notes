@@ -11,7 +11,7 @@ export const Filters: FC<FiltersProps> = memo(
         await onSendGamesRequest({
           teamId,
           setupCharacterIds: heroes.reduce<number[]>(
-            (acc, el) => (el ? [...acc, el?.heroId] : acc),
+            (acc, el) => (el?.heroId ? [...acc, el.heroId] : acc),
             []
           ),
         })
@@ -37,7 +37,7 @@ export const Filters: FC<FiltersProps> = memo(
                   const heroFields = (
                     getFieldValue('heroes') as FormValuesProps['heroes']
                   )?.reduce<number[]>(
-                    (acc, el) => (el ? [...acc, el.heroId] : acc),
+                    (acc, el) => (el?.heroId ? [...acc, el.heroId] : acc),
                     []
                   )
                   const heroOptions = heroes?.map(el => ({

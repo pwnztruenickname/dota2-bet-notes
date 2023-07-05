@@ -24,7 +24,7 @@ export const NoteForm: FC<NoteFormProps> = memo(
           ({ teamId, heroes }, i) => ({
             teamId,
             charactersInTeam: heroes.reduce<CharacterInTeamCreateContract[]>(
-              (acc, el) => (el ? [...acc, { id: el.heroId }] : acc),
+              (acc, el) => (el?.heroId ? [...acc, { id: el.heroId }] : acc),
               []
             ),
             teamSide: i ? TeamSide.Dire : TeamSide.Ancient,
@@ -63,7 +63,7 @@ export const NoteForm: FC<NoteFormProps> = memo(
                   const heroFields = fieldsValue
                     .map(el =>
                       el.heroes.reduce<number[]>(
-                        (acc, el) => (el ? [...acc, el.heroId] : acc),
+                        (acc, el) => (el?.heroId ? [...acc, el.heroId] : acc),
                         []
                       )
                     )
