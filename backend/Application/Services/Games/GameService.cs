@@ -29,10 +29,12 @@ public class GameService: IGameService
         {
             var teamInGameIds = await _teamInGameService.GetTeamInGameIdsByCharacterSetup(searchDto);
             var ids = teamInGameIds.ToList();
-            
-            if(ids.Any())
+
+            if (ids.Any())
                 gamesSearchQuery = gamesSearchQuery
                     .Where(x => ids.Contains(x.FirstTeamId) || ids.Contains(x.SecondTeamId));
+            
+            else return new List<GameFullDto>();
         }
         
         var result = await gamesSearchQuery.ProjectTo<GameFullDto>(_mapper.ConfigurationProvider)
