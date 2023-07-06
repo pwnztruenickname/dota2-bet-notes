@@ -17,12 +17,12 @@ export const INITIAL_VALUES = {
   teams: [
     {
       charactersInTeam: Object.keys(ROLES_LIST).map(el => ({
-        role: el,
+        gameRole: el,
       })),
     },
     {
       charactersInTeam: Object.keys(ROLES_LIST).map(el => ({
-        role: el,
+        gameRole: el,
       })),
     },
   ],

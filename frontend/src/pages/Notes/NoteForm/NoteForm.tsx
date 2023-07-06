@@ -104,7 +104,7 @@ export const NoteForm: FC<NoteFormProps> = memo(
                                           field.name,
                                           'charactersInTeam',
                                           hero.name,
-                                          'role',
+                                          'gameRole',
                                         ]}
                                       >
                                         {({ getFieldValue }) => {
@@ -115,7 +115,7 @@ export const NoteForm: FC<NoteFormProps> = memo(
                                                 field.name,
                                                 'charactersInTeam',
                                                 hero.name,
-                                                'role',
+                                                'gameRole',
                                               ]) as keyof typeof ROLES_LIST
                                             ]
                                           return (
