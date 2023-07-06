@@ -1,6 +1,8 @@
 import { FC, memo } from 'react'
 import { Space, Typography } from 'antd'
 import { Block } from 'shared/components'
+import { ReactComponent as CupIcon } from 'shared/img/cup.svg'
+import { ROLES_LIST } from '../NoteForm/NoteForm.consts'
 import { HeroItem } from './HeroItem'
 import { NoteProps } from './Note.model'
 import s from './Note.module.scss'
@@ -23,12 +25,13 @@ export const Note: FC<NoteProps> = memo(({ game, heroes }) => {
                 // TODO : убрать required
                 <HeroItem
                   hero={heroes.find(el => el.id === hero.hero!.id)}
+                  roleIcon={ROLES_LIST[hero.gameRole!]}
                   key={hero.id}
                 />
               ))}
             </Space>
           </div>
-          {!i && <Typography.Text>&mdash;</Typography.Text>}
+          {!i && <CupIcon />}
         </Space>
       ))}
       <Typography.Text className={s.comment}>{game.comment}</Typography.Text>

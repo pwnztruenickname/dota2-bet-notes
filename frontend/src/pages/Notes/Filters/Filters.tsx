@@ -22,7 +22,7 @@ export const Filters: FC<FiltersProps> = memo(
     return (
       <Block className={s.wrapper}>
         <Button onClick={onVisibleElement} disabled={isVisible}>
-          Новый матч
+          New note
         </Button>
         <Form<FormValuesProps>
           initialValues={{ heroes: new Array(5).fill(undefined) }}
@@ -77,7 +77,7 @@ export const Filters: FC<FiltersProps> = memo(
               />
             </Form.Item>
             <Button type="primary" htmlType="submit" block className={s.button}>
-              Поиск
+              Search
             </Button>
           </div>
         </Form>

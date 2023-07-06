@@ -1,7 +1,8 @@
 import { FC, Fragment, memo, useCallback } from 'react'
-import { Button, Form, Select, Space, Typography } from 'antd'
+import { Button, Form, Select, Space } from 'antd'
 import TextArea from 'antd/es/input/TextArea'
 import { useForm } from 'antd/lib/form/Form'
+import { ReactComponent as CupIcon } from 'shared/img/cup.svg'
 import {
   api,
   CharacterInTeamCreateContract,
@@ -10,6 +11,7 @@ import {
 } from 'shared/api'
 import { Block, HeroSelect, ShouldUpdateChecker } from 'shared/components'
 import { useRequest } from 'shared/hooks'
+import { INITIAL_VALUES, ROLES_LIST } from './NoteForm.consts'
 import { NoteFormProps, NoteFormValuesProps } from './NoteForm.model'
 import s from './NoteForm.module.scss'
 
@@ -21,12 +23,11 @@ export const NoteForm: FC<NoteFormProps> = memo(
     const handleFinish = useCallback(
       async ({ teams, ...values }: NoteFormValuesProps) => {
         const teamsData: TeamInGameCreateContract[] = teams.map(
-          ({ teamId, heroes }, i) => ({
+          ({ teamId, charactersInTeam }, i) => ({
             teamId,
-            charactersInTeam: heroes.reduce<CharacterInTeamCreateContract[]>(
-              (acc, el) => (el?.heroId ? [...acc, { id: el.heroId }] : acc),
-              []
-            ),
+            charactersInTeam: charactersInTeam.reduce<
+              CharacterInTeamCreateContract[]
+            >((acc, el) => (el.id ? [...acc, el] : acc), []),
             teamSide: i ? TeamSide.Dire : TeamSide.Ancient,
           })
         )
@@ -45,12 +46,7 @@ export const NoteForm: FC<NoteFormProps> = memo(
       <Form<NoteFormValuesProps>
         form={form}
         onFinish={handleFinish}
-        initialValues={{
-          teams: [
-            { heroes: new Array(5).fill(undefined) },
-            { heroes: new Array(5).fill(undefined) },
-          ],
-        }}
+        initialValues={INITIAL_VALUES}
       >
         <Block className={s.wrapper}>
           <Form.List name="teams">
@@ -62,8 +58,8 @@ export const NoteForm: FC<NoteFormProps> = memo(
                   ) as NoteFormValuesProps['teams']
                   const heroFields = fieldsValue
                     .map(el =>
-                      el.heroes.reduce<number[]>(
-                        (acc, el) => (el?.heroId ? [...acc, el.heroId] : acc),
+                      el.charactersInTeam.reduce<number[]>(
+                        (acc, el) => (el?.id ? [...acc, el.id] : acc),
                         []
                       )
                     )
@@ -97,23 +93,51 @@ export const NoteForm: FC<NoteFormProps> = memo(
                                 showSearch
                               />
                             </Form.Item>
-                            <Form.List name={[field.name, 'heroes']}>
+                            <Form.List name={[field.name, 'charactersInTeam']}>
                               {fields => (
                                 <Space>
                                   {fields.map(hero => (
-                                    <Form.Item
-                                      noStyle
-                                      name={[hero.name, 'heroId']}
-                                      key={hero.key}
-                                    >
-                                      <HeroSelect options={heroOptions} />
-                                    </Form.Item>
+                                    <div key={hero.key}>
+                                      <ShouldUpdateChecker
+                                        fieldPath={[
+                                          'teams',
+                                          field.name,
+                                          'charactersInTeam',
+                                          hero.name,
+                                          'gameRole',
+                                        ]}
+                                      >
+                                        {({ getFieldValue }) => {
+                                          const RoleIcon =
+                                            ROLES_LIST[
+                                              getFieldValue([
+                                                'teams',
+                                                field.name,
+                                                'charactersInTeam',
+                                                hero.name,
+                                                'gameRole',
+                                              ]) as keyof typeof ROLES_LIST
+                                            ]
+                                          return (
+                                            <Form.Item
+                                              noStyle
+                                              name={[hero.name, 'id']}
+                                            >
+                                              <HeroSelect
+                                                options={heroOptions}
+                                                suffixIcon={<RoleIcon />}
+                                              />
+                                            </Form.Item>
+                                          )
+                                        }}
+                                      </ShouldUpdateChecker>
+                                    </div>
                                   ))}
                                 </Space>
                               )}
                             </Form.List>
                           </div>
-                          {!i && <Typography.Text>&mdash;</Typography.Text>}
+                          {!i && <CupIcon className={s.cup} />}
                         </Fragment>
                       ))}
                     </Space>
@@ -128,10 +152,10 @@ export const NoteForm: FC<NoteFormProps> = memo(
             </Form.Item>
             <Button.Group className={s.buttons}>
               <Button block htmlType="reset" onClick={onFinishCallback}>
-                Отмена
+                Cancel
               </Button>
               <Button block htmlType="submit" type="primary">
-                Сохранить
+                Save
               </Button>
             </Button.Group>
           </div>
