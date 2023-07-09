@@ -10,5 +10,5 @@ export const ROLES_LIST = {
   [GameRole.Mid]: Mid,
   [GameRole.Hardlane]: Hardlane,
   [GameRole.FullSupport]: FullSupport,
-  [GameRole.SemiSupport]: SemiSupport
+  [GameRole.SemiSupport]: SemiSupport,
 }

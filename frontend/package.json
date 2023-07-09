@@ -7,6 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "lint:fix": "next lint --fix",
+    "pretty": "prettier --write **/*.{ts,tsx,scss}",
     "api:generate": "node swagger-generate.js && prettier --write **/api/api.ts",
     "style:generate": "ts-node --project ./tsconfig.node.json ./scripts/genAntdCss.tsx"
   },
