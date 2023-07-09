@@ -1,6 +1,5 @@
-import { useCallback, useContext, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { AxiosResponse } from 'axios'
-import { LoaderContext } from 'core/contexts'
 
 interface UseRequestReturnType<T, K> {
   response?: K
@@ -10,22 +9,19 @@ interface UseRequestReturnType<T, K> {
 export const useRequest = <T = any, K = any>(
   requestFn: (data: T) => Promise<AxiosResponse<K>>
 ): UseRequestReturnType<T, K> => {
-  const { setLoader } = useContext(LoaderContext)
   const [response, setResponse] = useState<K>()
 
   const sendRequest = useCallback(
     async (params?: T) => {
       try {
-        setLoader(true)
         const { data } = await requestFn(params as T)
         setResponse(data)
       } catch (e) {
         console.error(e)
       } finally {
-        setLoader(false)
       }
     },
-    [requestFn, setLoader]
+    [requestFn]
   )
 
   return { sendRequest, response }
