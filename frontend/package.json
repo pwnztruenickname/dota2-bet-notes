@@ -7,9 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "api:generate": "sh generate-schemas.sh",
-    "predev": "ts-node --project ./tsconfig.node.json ./scripts/genAntdCss.tsx",
-    "prebuild": "cross-env NODE_ENV=production ts-node --project ./tsconfig.node.json ./scripts/genAntdCss.tsx"
+    "api:generate": "node swagger-generate.js && prettier --write **/api/api.ts",
+    "style:generate": "ts-node --project ./tsconfig.node.json ./scripts/genAntdCss.tsx"
   },
   "dependencies": {
     "lodash": "4.17.21",
@@ -33,6 +32,7 @@
     "@ant-design/static-style-extract": "1.0.1",
     "sass": "1.63.6",
     "typescript": "5.1.6",
-    "@svgr/webpack": "8.0.1"
+    "@svgr/webpack": "8.0.1",
+    "swagger-typescript-api": "12.0.4"
   }
 }
