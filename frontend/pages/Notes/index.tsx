@@ -1,4 +1,5 @@
 import Filters from '@/pages/Notes/Filters'
+import NoteForm from '@/pages/Notes/NoteForm'
 import Note from './Note'
 import { api } from '@/src/api'
 import { useElementVisible, useRequest } from '@/src/hooks'
@@ -38,6 +39,9 @@ export default function Notes() {
         teams={teams}
         onSendGamesRequest={sendGamesRequest}
       />
+      {elementVisible && (
+        <NoteForm onFinishCallback={handleFinish} heroes={heroes} teams={teams}/>
+      )}
       {games?.map(el => <Note game={el} key={el.id} />)}
     </>
   )

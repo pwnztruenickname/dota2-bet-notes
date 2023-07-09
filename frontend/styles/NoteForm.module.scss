@@ -1,0 +1,18 @@
+.wrapper {
+  min-height: 120px;
+  display: flex;
+  justify-content: space-around;
+  gap: 10px;
+  background: url('../public/sides.jpg') no-repeat center / cover;
+}
+
+.team {
+  text-align: center;
+  margin: 0 auto 10px;
+  width: 300px;
+}
+
+.buttons {
+  width: 100%;
+  margin-top: 9px;
+}
