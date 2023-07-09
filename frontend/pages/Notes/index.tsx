@@ -1,3 +1,4 @@
+import Filters from '@/pages/Notes/Filters'
 import Note from './Note'
 import { api } from '@/src/api'
 import { useElementVisible, useRequest } from '@/src/hooks'
@@ -30,6 +31,13 @@ export default function Notes() {
 
   return (
     <>
+      <Filters
+        onVisibleElement={handleShowElement}
+        isVisible={elementVisible}
+        heroes={heroes}
+        teams={teams}
+        onSendGamesRequest={sendGamesRequest}
+      />
       {games?.map(el => <Note game={el} key={el.id} />)}
     </>
   )

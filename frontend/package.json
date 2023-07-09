@@ -12,6 +12,7 @@
     "prebuild": "cross-env NODE_ENV=production ts-node --project ./tsconfig.node.json ./scripts/genAntdCss.tsx"
   },
   "dependencies": {
+    "lodash": "4.17.21",
     "antd": "5.6.4",
     "@ant-design/icons": "5.1.4",
     "axios": "1.4.0",
