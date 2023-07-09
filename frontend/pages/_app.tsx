@@ -6,13 +6,20 @@ import Layout from '@/src/components/Layout'
 import type { AppProps } from 'next/app'
 import withTheme from '@/src/theme'
 import dayjs from 'dayjs'
+import Head from 'next/head'
 
 dayjs.locale('en')
 
 export default function App({ Component, pageProps }: AppProps) {
   return withTheme(
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+    <>
+      <Head>
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <title>D2BN</title>
+      </Head>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </>
   )
 }
