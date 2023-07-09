@@ -7,25 +7,31 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "api:generate": "sh generate-schemas.sh"
+    "api:generate": "sh generate-schemas.sh",
+    "predev": "ts-node --project ./tsconfig.node.json ./scripts/genAntdCss.tsx",
+    "prebuild": "cross-env NODE_ENV=production ts-node --project ./tsconfig.node.json ./scripts/genAntdCss.tsx"
   },
   "dependencies": {
+    "antd": "5.6.4",
+    "@ant-design/icons": "5.1.4",
     "axios": "1.4.0",
+    "next": "13.4.9",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "eslint": "8.44.0",
+    "eslint-config-next": "13.4.9",
+    "@types/lodash": "4.14.195",
     "@types/node": "20.4.1",
     "@types/react": "18.2.14",
     "@types/react-dom": "18.2.6",
-    "eslint": "8.44.0",
-    "eslint-config-next": "13.4.9",
-    "next": "13.4.9",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "typescript": "5.1.6",
-    "@chakra-ui/react": "2.7.1",
-    "@chakra-ui/next-js": "2.1.4",
-    "@emotion/react": "11.11.1",
-    "@emotion/styled": "11.11.0",
-    "framer-motion": "10.12.18",
+    "cross-env": "7.0.3",
+    "ts-node": "10.9.1",
+    "tslib": "2.6.0",
+    "@ant-design/static-style-extract": "1.0.1",
     "sass": "1.63.6",
+    "typescript": "5.1.6",
     "@svgr/webpack": "8.0.1"
   }
 }

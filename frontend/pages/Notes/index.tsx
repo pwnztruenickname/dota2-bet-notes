@@ -1,13 +1,11 @@
-'use client'
-import Filters from '@/app/components/Filters'
-import Note from '@/app/components/Note'
+import Note from './Note'
 import { api } from '@/src/api'
-import { useRequest } from '@/src/hooks'
-import { useDisclosure } from '@chakra-ui/react'
+import { useElementVisible, useRequest } from '@/src/hooks'
 import { useCallback, useEffect } from 'react'
 
 export default function Notes() {
-  const { isOpen, onClose, onOpen } = useDisclosure()
+  const { elementVisible, handleHideElement, handleShowElement } =
+    useElementVisible()
   const { sendRequest: sendHeroesRequest, response: heroes } = useRequest(
     api.heroList,
   )
@@ -20,9 +18,9 @@ export default function Notes() {
   )
 
   const handleFinish = useCallback(async () => {
-    onClose()
+    handleHideElement()
     await sendGamesRequest({ teamId: null, setupCharacterIds: [] })
-  }, [sendGamesRequest, onClose])
+  }, [handleHideElement, sendGamesRequest])
 
   useEffect(() => {
     sendHeroesRequest()
@@ -32,7 +30,6 @@ export default function Notes() {
 
   return (
     <>
-      <Filters onOpen={onOpen} isVisible={isOpen} heroes={heroes} teams={teams} onSendGamesRequest={handleFinish} />
       {games?.map(el => <Note game={el} key={el.id} />)}
     </>
   )

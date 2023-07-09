@@ -3,8 +3,9 @@
   position: relative;
 }
 
-.role {
-  z-index: 1;
+svg.role {
+  width: 22px;
+  height: 22px;
   position: absolute;
   right: 4px;
   top: 4px;
@@ -12,11 +13,18 @@
   border: 1px solid;
   padding: 3px;
   border-radius: 50%;
+
+  path {
+    fill: white;
+  }
 }
 
 .icon {
+  height: 60px;
+  background: no-repeat center / cover;
   margin-bottom: 5px;
   border-radius: 6px;
+  border: 1px solid;
   box-shadow: 0 0 3px 1px #fff;
 }
 
