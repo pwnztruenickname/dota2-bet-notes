@@ -1,0 +1,24 @@
+.wrapper {
+  height: 197px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: url('../public/sides.jpg') no-repeat center / cover;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 10px;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+
+.comment {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  overflow-y: scroll;
+  margin-left: 20px;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
