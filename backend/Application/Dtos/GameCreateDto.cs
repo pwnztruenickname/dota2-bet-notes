@@ -4,9 +4,9 @@ namespace Application.Dtos;
 
 public class GameCreateDto
 {
-    public TeamInGameCreateDto FirstTeam { get; set; }
+    public TeamInGameCreateDto Radiant { get; set; }
     
-    public TeamInGameCreateDto SecondTeam { get; set; }
+    public TeamInGameCreateDto Dire { get; set; }
     
     public string Comment { get; set; }
     

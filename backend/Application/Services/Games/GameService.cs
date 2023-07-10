@@ -30,7 +30,7 @@ public class GameService: IGameService
 
         if (ids.Any())
             gamesSearchQuery = gamesSearchQuery
-                .Where(x => ids.Contains(x.FirstTeamId) || ids.Contains(x.SecondTeamId));
+                .Where(x => ids.Contains(x.RadiantTeamId) || ids.Contains(x.DireTeamId));
         else return new List<GameFullDto>();
         
         var result = await gamesSearchQuery.ProjectTo<GameFullDto>(_mapper.ConfigurationProvider)

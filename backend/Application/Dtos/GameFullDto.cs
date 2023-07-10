@@ -6,9 +6,9 @@ public class GameFullDto
 {
     public long Id { get; set; }
     
-    public TeamInGameDto FirstTeam { get; set; }
+    public TeamInGameDto Radiant { get; set; }
     
-    public TeamInGameDto SecondTeam { get; set; }
+    public TeamInGameDto Dire { get; set; }
 
     public string Comment { get; set; }
     

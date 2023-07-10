@@ -12,20 +12,20 @@ public class GameConfiguration : IEntityTypeConfiguration<Game>
         
         builder.Property(h => h.Id).ValueGeneratedOnAdd().UseIdentityColumn().IsRequired();
 
-        builder.Property(x => x.FirstTeamId).HasComment("Идентификатор пиков первой команды");
-        builder.Property(x => x.SecondTeamId).HasComment("Идентификатор пиков первой команды");
+        builder.Property(x => x.RadiantTeamId).HasComment("Идентификатор пиков первой команды");
+        builder.Property(x => x.DireTeamId).HasComment("Идентификатор пиков первой команды");
         builder.Property(x => x.Comment).HasComment("Комментарий по игре");
 
         builder
-            .HasOne(x => x.FirstTeam)
+            .HasOne(x => x.Radiant)
             .WithMany()
-            .HasForeignKey(x => x.FirstTeamId)
+            .HasForeignKey(x => x.RadiantTeamId)
             .OnDelete(DeleteBehavior.Restrict);
         
         builder
-            .HasOne(x => x.SecondTeam)
+            .HasOne(x => x.Dire)
             .WithMany()
-            .HasForeignKey(x => x.SecondTeamId)
+            .HasForeignKey(x => x.DireTeamId)
             .OnDelete(DeleteBehavior.Restrict);
 
         builder
