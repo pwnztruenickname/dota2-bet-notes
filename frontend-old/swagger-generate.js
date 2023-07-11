@@ -3,7 +3,7 @@ const { resolve } = require('path')
 
 generateApi({
   name: 'api.ts',
-  output: resolve(process.cwd(), 'src/api'),
+  output: resolve(process.cwd(), 'src/shared/api'),
   url: 'http://localhost:8000/swagger/v1/swagger.json',
   httpClientType: 'axios',
 })
