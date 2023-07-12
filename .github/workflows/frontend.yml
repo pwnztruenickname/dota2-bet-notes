@@ -1,0 +1,15 @@
+name: Frontend
+run-name: Frontend
+on: [push, pull_request]
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          path: "${{ github.GITHUB_WORKSPACE }}/frontend"
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - run: npm ci
+      - run: npm run lint
