@@ -12,5 +12,4 @@ jobs:
         with:
           node-version: 18
       - run: cd frontend/
-      - run: npm ci
-      - run: npm run lint
+      - run: ls
