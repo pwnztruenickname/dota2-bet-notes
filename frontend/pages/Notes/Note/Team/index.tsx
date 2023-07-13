@@ -10,18 +10,14 @@ interface Props {
 export default function Team({ team }: Props) {
   return (
     <div>
-      {team && (
-        <>
-          <Typography.Title level={3} className={s.title}>
-            {team.team?.name}
-          </Typography.Title>
-          <Space>
-            {team.charactersInTeam?.map(hero => (
-              <HeroItem hero={hero} key={hero.id} />
-            ))}
-          </Space>
-        </>
-      )}
+      <Typography.Title level={3} className={s.title}>
+        {team?.team?.name}
+      </Typography.Title>
+      <Space>
+        {team?.charactersInTeam?.map(hero => (
+          <HeroItem hero={hero} key={hero.id} />
+        ))}
+      </Space>
     </div>
   )
 }

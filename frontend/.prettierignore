@@ -1,4 +1,5 @@
 build
 public
+.next
 coverage
 *.d.ts

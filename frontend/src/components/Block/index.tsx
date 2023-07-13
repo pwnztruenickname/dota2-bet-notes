@@ -8,7 +8,11 @@ interface Props {
   style?: CSSProperties
 }
 
-export default function Block({ children, className, style }: PropsWithChildren<Props>) {
+export default function Block({
+  children,
+  className,
+  style,
+}: PropsWithChildren<Props>) {
   const { token } = theme.useToken()
 
   return (
