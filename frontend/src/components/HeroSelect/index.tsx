@@ -3,7 +3,13 @@ import cn from 'classnames'
 import { HEROES_IMG_URL } from '@/src/consts'
 import s from '@/styles/HeroSelect.module.scss'
 
-export default function HeroSelect({ value, onChange, options, className, ...props }: SelectProps) {
+export default function HeroSelect({
+  value,
+  onChange,
+  options,
+  className,
+  ...props
+}: SelectProps) {
   const { token } = theme.useToken()
   return (
     <div className={s.wrapper}>
@@ -24,12 +30,12 @@ export default function HeroSelect({ value, onChange, options, className, ...pro
       <Select
         className={cn(s.select, className)}
         options={options}
-        placeholder='Hero'
+        placeholder="Hero"
         onChange={onChange}
         value={value}
         showSearch
         popupMatchSelectWidth={false}
-        optionFilterProp='label'
+        optionFilterProp="label"
         {...props}
       />
     </div>

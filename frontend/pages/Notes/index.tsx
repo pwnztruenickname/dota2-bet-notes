@@ -9,14 +9,14 @@ export default function Notes() {
   const { elementVisible, handleHideElement, handleShowElement } =
     useElementVisible()
   const { sendRequest: sendHeroesRequest, response: heroes } = useRequest(
-    api.heroList,
+    api.heroList
   )
   const { sendRequest: sendTeamsRequest, response: teams } = useRequest(
-    api.teamList,
+    api.teamList
   )
 
   const { sendRequest: sendGamesRequest, response: games } = useRequest(
-    api.gameSearchByCharactersSetupCreate,
+    api.gameSearchByCharactersSetupCreate
   )
 
   const handleFinish = useCallback(async () => {
@@ -40,9 +40,15 @@ export default function Notes() {
         onSendGamesRequest={sendGamesRequest}
       />
       {elementVisible && (
-        <NoteForm onFinishCallback={handleFinish} heroes={heroes} teams={teams}/>
+        <NoteForm
+          onFinishCallback={handleFinish}
+          heroes={heroes}
+          teams={teams}
+        />
       )}
-      {games?.map(el => <Note game={el} key={el.id} />)}
+      {games?.map(el => (
+        <Note game={el} key={el.id} />
+      ))}
     </>
   )
 }
