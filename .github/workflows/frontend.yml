@@ -1,6 +1,17 @@
 name: Frontend
 run-name: Frontend
-on: [push, pull_request]
+on:
+  push:
+    paths:
+      - frontend
+      - .github/workflows/frontend.yml
+  pull_request:
+    types: [opened]
+    branches:
+      - main
+    paths:
+      - frontend
+      - .github/workflows/frontend.yml
 jobs:
   lint:
     runs-on: ubuntu-latest
