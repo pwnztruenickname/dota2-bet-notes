@@ -6,9 +6,9 @@ public class GameFullContract
 {
     public long Id { get; set; }
     
-    public TeamInGameContract FirstTeam { get; set; }
+    public TeamInGameContract Radiant { get; set; }
     
-    public TeamInGameContract SecondTeam { get; set; }
+    public TeamInGameContract Dire { get; set; }
 
     public string Comment { get; set; }
     

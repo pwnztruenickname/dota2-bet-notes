@@ -2,18 +2,13 @@
   min-height: 120px;
   display: flex;
   justify-content: space-around;
+  align-items: center;
   gap: 10px;
   background: url('../public/sides.jpg') no-repeat center / cover;
 }
 
 .cup {
   color: black
-}
-
-.team {
-  text-align: center;
-  margin: 0 auto 10px;
-  width: 300px;
 }
 
 .buttons {

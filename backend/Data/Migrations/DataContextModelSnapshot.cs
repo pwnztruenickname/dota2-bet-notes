@@ -64,7 +64,7 @@ namespace Data.Migrations
                         .HasColumnType("text")
                         .HasComment("Комментарий по игре");
 
-                    b.Property<long>("FirstTeamId")
+                    b.Property<long>("DireTeamId")
                         .HasColumnType("bigint")
                         .HasComment("Идентификатор пиков первой команды");
 
@@ -72,15 +72,15 @@ namespace Data.Migrations
                         .HasColumnType("text")
                         .HasComment("Результат игры");
 
-                    b.Property<long>("SecondTeamId")
+                    b.Property<long>("RadiantTeamId")
                         .HasColumnType("bigint")
                         .HasComment("Идентификатор пиков первой команды");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FirstTeamId");
+                    b.HasIndex("DireTeamId");
 
-                    b.HasIndex("SecondTeamId");
+                    b.HasIndex("RadiantTeamId");
 
                     b.ToTable("games", (string)null);
                 });
@@ -166,9 +166,6 @@ namespace Data.Migrations
                         .HasColumnType("bigint")
                         .HasComment("Идентификатор команды");
 
-                    b.Property<int>("TeamSide")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
 
                     b.HasIndex("TeamId");
@@ -195,21 +192,21 @@ namespace Data.Migrations
 
             modelBuilder.Entity("Data.Model.Game", b =>
                 {
-                    b.HasOne("Data.Model.TeamInGame", "FirstTeam")
+                    b.HasOne("Data.Model.TeamInGame", "Dire")
                         .WithMany()
-                        .HasForeignKey("FirstTeamId")
+                        .HasForeignKey("DireTeamId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Data.Model.TeamInGame", "SecondTeam")
+                    b.HasOne("Data.Model.TeamInGame", "Radiant")
                         .WithMany()
-                        .HasForeignKey("SecondTeamId")
+                        .HasForeignKey("RadiantTeamId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("FirstTeam");
+                    b.Navigation("Dire");
 
-                    b.Navigation("SecondTeam");
+                    b.Navigation("Radiant");
                 });
 
             modelBuilder.Entity("Data.Model.Player", b =>

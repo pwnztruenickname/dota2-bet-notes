@@ -66,8 +66,7 @@ namespace Data.Migrations
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     GameId = table.Column<long>(type: "bigint", nullable: false, comment: "Идентификатор игры"),
-                    TeamId = table.Column<long>(type: "bigint", nullable: false, comment: "Идентификатор команды"),
-                    TeamSide = table.Column<int>(type: "integer", nullable: false)
+                    TeamId = table.Column<long>(type: "bigint", nullable: false, comment: "Идентификатор команды")
                 },
                 constraints: table =>
                 {
@@ -113,8 +112,8 @@ namespace Data.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    FirstTeamId = table.Column<long>(type: "bigint", nullable: false, comment: "Идентификатор пиков первой команды"),
-                    SecondTeamId = table.Column<long>(type: "bigint", nullable: false, comment: "Идентификатор пиков первой команды"),
+                    RadiantTeamId = table.Column<long>(type: "bigint", nullable: false, comment: "Идентификатор пиков первой команды"),
+                    DireTeamId = table.Column<long>(type: "bigint", nullable: false, comment: "Идентификатор пиков первой команды"),
                     Comment = table.Column<string>(type: "text", nullable: false, comment: "Комментарий по игре"),
                     GameResult = table.Column<string>(type: "text", nullable: true, comment: "Результат игры")
                 },
@@ -122,14 +121,14 @@ namespace Data.Migrations
                 {
                     table.PrimaryKey("PK_games", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_games_team_in_games_FirstTeamId",
-                        column: x => x.FirstTeamId,
+                        name: "FK_games_team_in_games_DireTeamId",
+                        column: x => x.DireTeamId,
                         principalTable: "team_in_games",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_games_team_in_games_SecondTeamId",
-                        column: x => x.SecondTeamId,
+                        name: "FK_games_team_in_games_RadiantTeamId",
+                        column: x => x.RadiantTeamId,
                         principalTable: "team_in_games",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -146,14 +145,14 @@ namespace Data.Migrations
                 column: "TeamInGameId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_games_FirstTeamId",
+                name: "IX_games_DireTeamId",
                 table: "games",
-                column: "FirstTeamId");
+                column: "DireTeamId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_games_SecondTeamId",
+                name: "IX_games_RadiantTeamId",
                 table: "games",
-                column: "SecondTeamId");
+                column: "RadiantTeamId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Players_TeamId",

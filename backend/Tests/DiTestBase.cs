@@ -205,7 +205,7 @@ namespace Tests
             var game = new Game
             {
                 Id = 1,
-                FirstTeam = new TeamInGame
+                Radiant = new TeamInGame
                 {
                     TeamId = 1,
                     CharactersInTeam = new List<CharacterInTeam>
@@ -217,7 +217,7 @@ namespace Tests
                         new CharacterInTeam{Id = 5, CharacterId = 5},
                     }
                 },
-                SecondTeam = new TeamInGame
+                Dire = new TeamInGame
                 {
                     TeamId = 2,
                     CharactersInTeam = new List<CharacterInTeam>

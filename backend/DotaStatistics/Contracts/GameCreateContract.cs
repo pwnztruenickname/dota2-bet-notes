@@ -4,9 +4,9 @@ namespace DotaStatistics.Contracts;
 
 public class GameCreateContract
 {
-    public TeamInGameCreateContract FirstTeam { get; set; }
+    public TeamInGameCreateContract Radiant { get; set; }
     
-    public TeamInGameCreateContract SecondTeam { get; set; }
+    public TeamInGameCreateContract Dire { get; set; }
     
     public string Comment { get; set; }
     

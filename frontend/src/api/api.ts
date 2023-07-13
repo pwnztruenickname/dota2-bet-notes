@@ -27,8 +27,8 @@ export interface CharacterInTeamCreateContract {
 }
 
 export interface GameCreateContract {
-  firstTeam?: TeamInGameCreateContract
-  secondTeam?: TeamInGameCreateContract
+  radiant?: TeamInGameCreateContract
+  dire?: TeamInGameCreateContract
   comment?: string
   gameResult?: GameResult
 }
@@ -36,8 +36,8 @@ export interface GameCreateContract {
 export interface GameFullContract {
   /** @format int64 */
   id?: number
-  firstTeam?: TeamInGameContract
-  secondTeam?: TeamInGameContract
+  radiant?: TeamInGameContract
+  dire?: TeamInGameContract
   comment?: string
   gameResult?: GameResult
 }
@@ -81,20 +81,13 @@ export interface TeamContract {
 
 export interface TeamInGameContract {
   team?: TeamContract
-  teamSide?: TeamSide
   charactersInTeam?: CharacterInTeamContract[]
 }
 
 export interface TeamInGameCreateContract {
   /** @format int64 */
   teamId?: number
-  teamSide?: TeamSide
   charactersInTeam?: CharacterInTeamCreateContract[]
-}
-
-export enum TeamSide {
-  Dire = 'Dire',
-  Ancient = 'Ancient',
 }
 
 import axios, {

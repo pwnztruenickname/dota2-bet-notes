@@ -15,7 +15,5 @@ public class TeamInGame
     
     public long TeamId { get; set; }
     
-    public TeamSide TeamSide { get; set; }
-    
     public List<CharacterInTeam> CharactersInTeam { get; set; }
 }
