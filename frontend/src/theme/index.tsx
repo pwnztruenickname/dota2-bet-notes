@@ -1,6 +1,6 @@
 import React, { JSX } from 'react'
 import { ConfigProvider, theme } from 'antd'
-import enUS from 'antd/locale/en_US';
+import enUS from 'antd/locale/en_US'
 
 const withTheme = (node: JSX.Element) => (
   <>

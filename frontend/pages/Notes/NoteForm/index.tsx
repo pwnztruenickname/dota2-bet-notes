@@ -1,6 +1,6 @@
 import TeamFields from './TeamFields'
 import CupIcon from '@/public/cup.svg'
-import { INITIAL_VALUES } from './consts'
+import { INITIAL_VALUES } from '@/src/consts/TeamFields.consts'
 import { useCallback } from 'react'
 import { Button, Form, Input } from 'antd'
 import { useForm } from 'antd/lib/form/Form'
