@@ -1,5 +1,11 @@
 name: Frontend
+
 run-name: Frontend
+
+defaults:
+  run:
+    working-directory: frontend
+
 on:
   push:
     paths:
@@ -13,12 +19,10 @@ on:
     paths:
       - 'frontend/**'
       - '.github/workflows/frontend.yml'
+
 jobs:
   lint:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: frontend
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -29,9 +33,6 @@ jobs:
   build:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: frontend
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
