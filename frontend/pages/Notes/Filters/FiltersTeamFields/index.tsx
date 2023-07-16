@@ -2,8 +2,7 @@ import { GameCreateContract, HeroContract, TeamContract } from '@/src/api'
 import { Form, Select, Space } from 'antd'
 import HeroSelect from '@/src/components/HeroSelect'
 import ShouldUpdateChecker from '@/src/components/ShouldUpdateChecker'
-import { ROLES_LIST } from '@/src/consts'
-import s from '@/styles/TeamFields.module.scss'
+import s from '@/styles/FiltersTeamFields.module.scss'
 import { upperFirst } from 'lodash'
 
 interface Props {
@@ -13,7 +12,7 @@ interface Props {
   teams?: TeamContract[]
 }
 
-export default function TeamFields({
+export default function FiltersTeamFields({
   mainFieldName,
   dependFieldName,
   teams,
@@ -37,43 +36,35 @@ export default function TeamFields({
           </Form.Item>
         )}
       </ShouldUpdateChecker>
-      <Form.List name={[mainFieldName, 'charactersInTeam']}>
+      <Form.List name={[mainFieldName, 'setupCharacterIds']}>
         {fields => (
           <Space>
             {fields.map(field => (
               <div key={field.key}>
                 <ShouldUpdateChecker
                   fieldPath={[
-                    ['radiant', 'charactersInTeam'],
-                    ['dire', 'charactersInTeam'],
+                    ['radiant', 'setupCharacterIds'],
+                    ['dire', 'setupCharacterIds'],
                   ]}
                 >
                   {({ getFieldsValue }) => {
                     const heroFields = getFieldsValue([
-                      ['radiant', 'charactersInTeam'],
-                      ['dire', 'charactersInTeam'],
+                      ['radiant', 'setupCharacterIds'],
+                      ['dire', 'setupCharacterIds'],
                     ])
-                    const RoleIcon =
-                      ROLES_LIST[
-                        heroFields.radiant.charactersInTeam[field.name]
-                          .gameRole as keyof typeof ROLES_LIST
-                      ]
                     const heroesValue = [
-                      ...heroFields.radiant.charactersInTeam,
-                      ...heroFields.dire.charactersInTeam,
+                      ...heroFields.radiant.setupCharacterIds,
+                      ...heroFields.dire.setupCharacterIds,
                     ]
                     const heroOptions = heroes?.map(el => ({
                       label: el.localizedName,
                       value: el.id,
                       key: el.name,
-                      disabled: heroesValue.find(hero => hero.id === el.id),
+                      disabled: heroesValue.find(hero => hero?.id === el.id),
                     }))
                     return (
                       <Form.Item noStyle name={[field.name, 'id']}>
-                        <HeroSelect
-                          options={heroOptions}
-                          suffixIcon={<RoleIcon />}
-                        />
+                        <HeroSelect options={heroOptions} />
                       </Form.Item>
                     )
                   }}

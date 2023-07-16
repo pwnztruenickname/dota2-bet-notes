@@ -1,17 +1,10 @@
 .wrapper {
   display: flex;
-  justify-content: space-between;
-}
-
-.form {
+  justify-content: space-around;
   align-items: center;
-  justify-content: space-between;
-}
-
-.team {
-  width: 200px;
+  gap: 10px;
 }
 
 .button {
-  margin-top: 32px;
+  margin-top: 20px;
 }

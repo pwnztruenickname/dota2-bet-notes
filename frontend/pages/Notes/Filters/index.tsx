@@ -1,21 +1,21 @@
+import { INITIAL_VALUES } from '@/src/consts/Filters.consts'
+import FiltersTeamFields from './FiltersTeamFields'
 import {
   GameWithCharacterSetupSearchContract,
   HeroContract,
   TeamContract,
 } from '@/src/api'
 import { useCallback } from 'react'
-import { Button, Form, Select, Space } from 'antd'
+import { Button, Form } from 'antd'
 import Block from '@/src/components/Block'
-import ShouldUpdateChecker from '@/src/components/ShouldUpdateChecker'
 import s from '@/styles/Filters.module.scss'
-import HeroSelect from '@/src/components/HeroSelect'
 
 interface HeroesProps {
-  heroId: number
+  id: number
 }
 
 interface FormValuesProps
-  extends Pick<GameWithCharacterSetupSearchContract, 'teamId'> {
+  extends Omit<GameWithCharacterSetupSearchContract, 'setupCharacterIds'> {
   setupCharacterIds: HeroesProps[]
 }
 
@@ -25,6 +25,17 @@ interface Props {
   onSendGamesRequest: (values: GameWithCharacterSetupSearchContract) => void
   heroes?: HeroContract[]
   teams?: TeamContract[]
+}
+
+interface r {
+  radiant: {
+    teamId: number
+    setupCharacterIds: number[]
+  }
+  dire: {
+    teamId: number
+    setupCharacterIds: number[]
+  }
 }
 
 export default function Filters({
@@ -39,7 +50,7 @@ export default function Filters({
       await onSendGamesRequest({
         teamId,
         setupCharacterIds: setupCharacterIds.reduce<number[]>(
-          (acc, el) => (el?.heroId ? [...acc, el.heroId] : acc),
+          (acc, el) => (el?.id ? [...acc, el.id] : acc),
           []
         ),
       })
@@ -48,66 +59,32 @@ export default function Filters({
   )
 
   return (
-    <Block className={s.wrapper}>
-      <Button onClick={onVisibleElement} disabled={isVisible}>
-        New note
-      </Button>
-      <Form<FormValuesProps>
-        initialValues={{ setupCharacterIds: new Array(5).fill(undefined) }}
-        layout="inline"
-        className={s.form}
-        onFinish={handleFinish}
-      >
-        <Form.List name="setupCharacterIds">
-          {fields => (
-            <ShouldUpdateChecker fieldPath="setupCharacterIds">
-              {({ getFieldValue }) => {
-                const heroFields = (
-                  getFieldValue(
-                    'setupCharacterIds'
-                  ) as FormValuesProps['setupCharacterIds']
-                )?.reduce<number[]>(
-                  (acc, el) => (el?.heroId ? [...acc, el.heroId] : acc),
-                  []
-                )
-                const heroOptions = heroes?.map(el => ({
-                  label: el.localizedName,
-                  value: el.id,
-                  key: el.name,
-                  // TODO: убрать required
-                  disabled: heroFields.includes(el.id!),
-                }))
-                return (
-                  <Space size={0}>
-                    {fields.map(field => (
-                      <Form.Item key={field.key} name={[field.name, 'heroId']}>
-                        <HeroSelect options={heroOptions} allowClear />
-                      </Form.Item>
-                    ))}
-                  </Space>
-                )
-              }}
-            </ShouldUpdateChecker>
-          )}
-        </Form.List>
+    <Form<FormValuesProps>
+      initialValues={INITIAL_VALUES}
+      onFinish={handleFinish}
+    >
+      <Block className={s.wrapper}>
+        <FiltersTeamFields
+          mainFieldName="radiant"
+          dependFieldName="dire"
+          heroes={heroes}
+          teams={teams}
+        />
+        <FiltersTeamFields
+          mainFieldName="dire"
+          dependFieldName="radiant"
+          heroes={heroes}
+          teams={teams}
+        />
         <div>
-          <Form.Item name="teamId" className={s.team}>
-            <Select
-              optionFilterProp="label"
-              placeholder="Team name"
-              showSearch
-              allowClear
-              options={teams?.map(el => ({
-                label: el.name,
-                value: el.id,
-              }))}
-            />
-          </Form.Item>
+          <Button onClick={onVisibleElement} disabled={isVisible} block>
+            New note
+          </Button>
           <Button type="primary" htmlType="submit" block className={s.button}>
             Search
           </Button>
         </div>
-      </Form>
-    </Block>
+      </Block>
+    </Form>
   )
 }
