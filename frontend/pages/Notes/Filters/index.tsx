@@ -27,17 +27,6 @@ interface Props {
   teams?: TeamContract[]
 }
 
-interface r {
-  radiant: {
-    teamId: number
-    setupCharacterIds: number[]
-  }
-  dire: {
-    teamId: number
-    setupCharacterIds: number[]
-  }
-}
-
 export default function Filters({
   onVisibleElement,
   isVisible,
@@ -49,7 +38,7 @@ export default function Filters({
     async ({ teamId, setupCharacterIds }: FormValuesProps) => {
       await onSendGamesRequest({
         teamId,
-        setupCharacterIds: setupCharacterIds.reduce<number[]>(
+        setupCharacterIds: setupCharacterIds?.reduce<number[]>(
           (acc, el) => (el?.id ? [...acc, el.id] : acc),
           []
         ),
@@ -65,14 +54,14 @@ export default function Filters({
     >
       <Block className={s.wrapper}>
         <FiltersTeamFields
-          mainFieldName="radiant"
-          dependFieldName="dire"
+          mainFieldName="one"
+          dependFieldName="two"
           heroes={heroes}
           teams={teams}
         />
         <FiltersTeamFields
-          mainFieldName="dire"
-          dependFieldName="radiant"
+          mainFieldName="two"
+          dependFieldName="one"
           heroes={heroes}
           teams={teams}
         />

@@ -1,4 +1,4 @@
-import { GameCreateContract, HeroContract, TeamContract } from '@/src/api'
+import { HeroContract, TeamContract } from '@/src/api'
 import { Form, Select, Space } from 'antd'
 import HeroSelect from '@/src/components/HeroSelect'
 import ShouldUpdateChecker from '@/src/components/ShouldUpdateChecker'
@@ -6,8 +6,8 @@ import s from '@/styles/FiltersTeamFields.module.scss'
 import { upperFirst } from 'lodash'
 
 interface Props {
-  mainFieldName: keyof Pick<GameCreateContract, 'radiant' | 'dire'>
-  dependFieldName: keyof Pick<GameCreateContract, 'radiant' | 'dire'>
+  mainFieldName: string
+  dependFieldName: string
   heroes?: HeroContract[]
   teams?: TeamContract[]
 }
@@ -43,18 +43,18 @@ export default function FiltersTeamFields({
               <div key={field.key}>
                 <ShouldUpdateChecker
                   fieldPath={[
-                    ['radiant', 'setupCharacterIds'],
-                    ['dire', 'setupCharacterIds'],
+                    [mainFieldName, 'setupCharacterIds'],
+                    [dependFieldName, 'setupCharacterIds'],
                   ]}
                 >
                   {({ getFieldsValue }) => {
                     const heroFields = getFieldsValue([
-                      ['radiant', 'setupCharacterIds'],
-                      ['dire', 'setupCharacterIds'],
+                      [mainFieldName, 'setupCharacterIds'],
+                      [dependFieldName, 'setupCharacterIds'],
                     ])
                     const heroesValue = [
-                      ...heroFields.radiant.setupCharacterIds,
-                      ...heroFields.dire.setupCharacterIds,
+                      ...heroFields[mainFieldName].setupCharacterIds,
+                      ...heroFields[dependFieldName].setupCharacterIds,
                     ]
                     const heroOptions = heroes?.map(el => ({
                       label: el.localizedName,

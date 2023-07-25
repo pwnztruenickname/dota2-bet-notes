@@ -1,20 +1,19 @@
 import Filters from '@/pages/Notes/Filters'
 import NoteForm from '@/pages/Notes/NoteForm'
 import Note from './Note'
-import { api } from '@/src/api'
+import { api, GameFullContract, HeroContract, TeamContract } from '@/src/api'
 import { useElementVisible, useRequest } from '@/src/hooks'
-import { useCallback, useEffect } from 'react'
+import { useCallback } from 'react'
 
-export default function Notes() {
+interface Props {
+  heroes: HeroContract[]
+  teams: TeamContract[]
+  initialGames: GameFullContract[]
+}
+
+export default function Notes({ heroes, teams, initialGames }: Props) {
   const { elementVisible, handleHideElement, handleShowElement } =
     useElementVisible()
-  const { sendRequest: sendHeroesRequest, response: heroes } = useRequest(
-    api.heroList
-  )
-  const { sendRequest: sendTeamsRequest, response: teams } = useRequest(
-    api.teamList
-  )
-
   const { sendRequest: sendGamesRequest, response: games } = useRequest(
     api.gameSearchByCharactersSetupCreate
   )
@@ -23,12 +22,6 @@ export default function Notes() {
     handleHideElement()
     await sendGamesRequest({ teamId: null, setupCharacterIds: [] })
   }, [handleHideElement, sendGamesRequest])
-
-  useEffect(() => {
-    sendHeroesRequest()
-    sendTeamsRequest()
-    sendGamesRequest({ teamId: null, setupCharacterIds: [] })
-  }, [sendGamesRequest, sendHeroesRequest, sendTeamsRequest])
 
   return (
     <>
@@ -46,7 +39,7 @@ export default function Notes() {
           teams={teams}
         />
       )}
-      {games?.map(el => (
+      {(games || initialGames)?.map(el => (
         <Note game={el} key={el.id} />
       ))}
     </>
